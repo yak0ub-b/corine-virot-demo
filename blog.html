@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog Nutrition — Corinne Virot, Diététicienne</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream: '#F5EFE6', creamDark: '#EDE4D6',
+            sage: '#7A9E87', sageDark: '#5D7E6A',
+            gold: '#C4A46B', goldDark: '#A8854A',
+            ink: '#2C2C2C', muted: '#6B6B6B', elevated: '#FDFAF6',
+          },
+          fontFamily: {
+            display: ['Cormorant Garamond', 'Georgia', 'serif'],
+            body: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background-color: #F5EFE6; color: #2C2C2C; line-height: 1.7; overflow-x: hidden; }
+    h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; }
+
+    body::before {
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    }
+
+    .nav-scrolled { backdrop-filter: blur(16px); background: rgba(245,239,230,0.88) !important; box-shadow: 0 1px 24px rgba(44,44,44,0.07); }
+    nav a { transition: color 0.2s ease; }
+    nav a:hover { color: #7A9E87; }
+    nav a.active { color: #7A9E87; border-bottom: 1px solid #7A9E87; padding-bottom: 2px; }
+
+    .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: #7A9E87; color: #FDFAF6; padding: 15px 36px; font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1); box-shadow: 0 4px 20px rgba(122,158,135,0.3); }
+    .btn-primary:hover { background: #5D7E6A; transform: translateY(-2px); }
+    .btn-primary:active { transform: translateY(0); }
+
+    .btn-gold { display: inline-flex; align-items: center; gap: 8px; background: #C4A46B; color: #FDFAF6; padding: 15px 36px; font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1); box-shadow: 0 4px 20px rgba(196,164,107,0.35); }
+    .btn-gold:hover { background: #A8854A; transform: translateY(-2px); }
+
+    /* Scroll reveal */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s cubic-bezier(0.25,0.46,0.45,0.94), transform 0.65s cubic-bezier(0.25,0.46,0.45,0.94); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.08s; }
+    .reveal-delay-2 { transition-delay: 0.16s; }
+    .reveal-delay-3 { transition-delay: 0.24s; }
+    .reveal-delay-4 { transition-delay: 0.32s; }
+    .reveal-delay-5 { transition-delay: 0.40s; }
+    .reveal-delay-6 { transition-delay: 0.48s; }
+
+    /* Blog cards */
+    .blog-card { background: #FDFAF6; overflow: hidden; transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.35s ease; box-shadow: 0 2px 16px rgba(44,44,44,0.05); }
+    .blog-card:hover { transform: translateY(-8px); box-shadow: 0 20px 48px rgba(44,44,44,0.11); }
+    .blog-card-img { overflow: hidden; }
+    .blog-card-img img { width: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94); display: block; }
+    .blog-card:hover .blog-card-img img { transform: scale(1.07); }
+
+    /* Featured card */
+    .featured-card { background: #FDFAF6; overflow: hidden; box-shadow: 0 4px 32px rgba(44,44,44,0.07); transition: box-shadow 0.3s ease; }
+    .featured-card:hover { box-shadow: 0 12px 48px rgba(44,44,44,0.12); }
+    .featured-img { overflow: hidden; height: 480px; }
+    .featured-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94); display: block; }
+    .featured-card:hover .featured-img img { transform: scale(1.04); }
+
+    /* Category filter */
+    .cat-btn { padding: 8px 20px; font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: all 0.2s ease; border: 1px solid rgba(44,44,44,0.12); color: #6B6B6B; background: transparent; }
+    .cat-btn:hover, .cat-btn.active { background: #7A9E87; color: #FDFAF6; border-color: #7A9E87; }
+
+    /* Newsletter */
+    .newsletter-input { flex: 1; padding: 14px 20px; font-size: 13px; border: 1px solid rgba(44,44,44,0.15); background: #FDFAF6; color: #2C2C2C; outline: none; font-family: 'Inter', sans-serif; transition: border-color 0.2s ease; }
+    .newsletter-input:focus { border-color: #7A9E87; }
+    .newsletter-input::placeholder { color: #aaa; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav" style="position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(245,239,230,0.96); transition: all 0.3s ease; padding: 0 48px;">
+  <div style="max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 72px;">
+    <a href="index.html" style="text-decoration: none;">
+      <span style="font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 400; color: #2C2C2C; letter-spacing: 0.02em;">Corinne <span style="color: #7A9E87;">Virot</span></span>
+      <div style="font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #6B6B6B; margin-top: 1px;">Diététicienne-Nutritionniste</div>
+    </a>
+    <div style="display: flex; align-items: center; gap: 36px;">
+      <a href="index.html" style="font-size: 13px; letter-spacing: 0.05em; color: #2C2C2C; text-decoration: none;">Accueil</a>
+      <a href="consultations.html" style="font-size: 13px; letter-spacing: 0.05em; color: #2C2C2C; text-decoration: none;">Consultations</a>
+      <a href="approche.html" style="font-size: 13px; letter-spacing: 0.05em; color: #2C2C2C; text-decoration: none;">Mon Approche</a>
+      <a href="blog.html" class="active" style="font-size: 13px; letter-spacing: 0.05em; color: #2C2C2C; text-decoration: none;">Blog</a>
+      <a href="contact.html" style="font-size: 13px; letter-spacing: 0.05em; color: #2C2C2C; text-decoration: none;">Contact</a>
+      <a href="https://www.doctolib.fr/dieteticien/le-pin/corinne-virot/booking" target="_blank" class="btn-primary" style="padding: 11px 24px;">Prendre RDV</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════ HERO ═══ -->
+<section style="padding-top: 72px; background: #272727; position: relative; overflow: hidden; min-height: 420px; display: flex; align-items: center;">
+  <!-- Background food photo -->
+  <div style="position: absolute; inset: 0;">
+    <img src="https://images.unsplash.com/photo-1467453678174-768ec283a940?w=1600&h=600&fit=crop&q=80" alt="" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.18;" loading="eager">
+    <div style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(39,39,39,0.95) 0%, rgba(39,39,39,0.75) 100%);"></div>
+  </div>
+  <!-- Radial glow -->
+  <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 800px; height: 400px; background: radial-gradient(ellipse, rgba(122,158,135,0.08) 0%, transparent 65%); pointer-events: none;"></div>
+
+  <div style="position: relative; max-width: 1280px; margin: 0 auto; padding: 72px 48px; width: 100%;">
+    <div style="font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: #7A9E87; margin-bottom: 18px; font-weight: 500;">Conseils & Recettes</div>
+    <h1 style="font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 300; color: #FDFAF6; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 20px; max-width: 680px;">
+      Le blog <em style="font-style: italic; color: #C4A46B;">nutritionnel</em>
+    </h1>
+    <p style="font-size: 1rem; color: rgba(253,250,246,0.55); max-width: 560px; line-height: 1.85;">
+      Articles, conseils pratiques et recettes pour mieux comprendre votre alimentation et prendre soin de vous au quotidien.
+    </p>
+  </div>
+</section>
+
+<!-- ════════════════════════ CATEGORY FILTER ═══ -->
+<section style="background: #FDFAF6; border-bottom: 1px solid rgba(44,44,44,0.06); padding: 20px 48px;">
+  <div style="max-width: 1280px; margin: 0 auto; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+    <span style="font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #6B6B6B; margin-right: 8px;">Filtrer :</span>
+    <button class="cat-btn active" onclick="filterCat(this, 'all')">Tous</button>
+    <button class="cat-btn" onclick="filterCat(this, 'menopause')">Ménopause</button>
+    <button class="cat-btn" onclick="filterCat(this, 'sopk')">SOPK</button>
+    <button class="cat-btn" onclick="filterCat(this, 'endometriose')">Endométriose</button>
+    <button class="cat-btn" onclick="filterCat(this, 'equilibre')">Équilibre</button>
+    <button class="cat-btn" onclick="filterCat(this, 'recettes')">Recettes</button>
+  </div>
+</section>
+
+<!-- ══════════════════════════ FEATURED ARTICLE ═══ -->
+<section style="padding: 80px 48px 0; background: #F5EFE6;">
+  <div style="max-width: 1280px; margin: 0 auto;">
+    <div style="font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: #7A9E87; margin-bottom: 24px; font-weight: 500;">À la une</div>
+
+    <a href="#" class="featured-card reveal" style="display: grid; grid-template-columns: 1fr 1fr; text-decoration: none; color: inherit;">
+      <div class="featured-img">
+        <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=800&h=600&fit=crop&q=80" alt="Alimentation anti-inflammatoire et endométriose">
+      </div>
+      <div style="padding: 56px 56px; display: flex; flex-direction: column; justify-content: center; background: #FDFAF6;">
+        <div style="display: flex; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; align-items: center;">
+          <span style="font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; background: rgba(196,164,107,0.1); color: #C4A46B; padding: 5px 12px; font-weight: 500;">Endométriose</span>
+          <span style="font-size: 11px; color: #6B6B6B;">· 8 min de lecture</span>
+        </div>
+        <h2 style="font-size: clamp(1.6rem, 2.5vw, 2.2rem); font-weight: 400; line-height: 1.3; letter-spacing: -0.02em; margin-bottom: 20px;">
+          Alimentation anti-inflammatoire et endométriose : ce que la science dit vraiment
+        </h2>
+        <p style="font-size: 0.9rem; color: #6B6B6B; line-height: 1.9; margin-bottom: 32px;">
+          L'endométriose touche 1 femme sur 10. Si elle ne se guérit pas par l'alimentation, certains choix nutritionnels peuvent considérablement réduire l'inflammation et améliorer la qualité de vie. Voici ce que les études récentes nous enseignent, et comment je l'applique en consultation.
+        </p>
+        <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 24px; border-top: 1px solid rgba(44,44,44,0.07);">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="width: 36px; height: 36px; border-radius: 50%; background: rgba(122,158,135,0.15); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: #7A9E87; font-weight: 500;">C</div>
+            <div>
+              <div style="font-size: 12px; font-weight: 500; color: #2C2C2C;">Corinne Virot</div>
+              <div style="font-size: 11px; color: #6B6B6B;">Mars 2024</div>
+            </div>
+          </div>
+          <span style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #7A9E87; font-weight: 500; transition: color 0.2s;">Lire l'article →</span>
+        </div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ════════════════════════════ ARTICLES GRID ═══ -->
+<section style="padding: 64px 48px 112px; background: #F5EFE6;">
+  <div style="max-width: 1280px; margin: 0 auto;">
+    <div id="articles-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;">
+
+      <!-- Article 1 — Ménopause -->
+      <a href="#" class="blog-card reveal reveal-delay-1" data-cat="menopause" style="text-decoration: none; color: inherit;">
+        <div class="blog-card-img" style="height: 230px;">
+          <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&h=400&fit=crop&q=80" alt="Alimentation ménopause" loading="lazy">
+        </div>
+        <div style="padding: 28px 28px 32px;">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
+            <span style="font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; background: rgba(122,158,135,0.1); color: #7A9E87; padding: 4px 10px;">Ménopause</span>
+            <span style="font-size: 11px; color: #aaa;">5 min</span>
+          </div>
+          <h3 style="font-size: 1.3rem; font-weight: 500; line-height: 1.4; margin-bottom: 12px; letter-spacing: -0.01em;">Les aliments alliés de la ménopause que vous devriez connaître</h3>
+          <p style="font-size: 0.82rem; color: #6B6B6B; line-height: 1.85; margin-bottom: 22px;">Phytoestrogènes, calcium, oméga-3 — les nutriments clés pour traverser cette période avec sérénité et préserver votre capital osseux.</p>
+          <div style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #C4A46B; font-weight: 500; transition: color 0.2s;">Lire →</div>
+        </div>
+      </a>
+
+      <!-- Article 2 — SOPK -->
+      <a href="#" class="blog-card reveal reveal-delay-2" data-cat="sopk" style="text-decoration: none; color: inherit;">
+        <div class="blog-card-img" style="height: 230px;">
+          <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&h=400&fit=crop&q=80" alt="SOPK alimentation" loading="lazy">
+        </div>
+        <div style="padding: 28px 28px 32px;">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
+            <span style="font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; background: rgba(196,164,107,0.1); color: #C4A46B; padding: 4px 10px;">SOPK</span>
+            <span style="font-size: 11px; color: #aaa;">7 min</span>
+          </div>
+          <h3 style="font-size: 1.3rem; font-weight: 500; line-height: 1.4; margin-bottom: 12px; letter-spacing: -0.01em;">SOPK : réguler ses hormones naturellement par l'alimentation</h3>
+          <p style="font-size: 0.82rem; color: #6B6B6B; line-height: 1.85; margin-bottom: 22px;">Index glycémique bas, aliments anti-inflammatoires, microbiome intestinal — les piliers d'une nutrition adaptée au syndrome des ovaires polykystiques.</p>
+          <div style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #C4A46B; font-weight: 500;">Lire →</div>
+        </div>
+      </a>
+
+      <!-- Article 3 — Équilibre -->
+      <a href="#" class="blog-card reveal reveal-delay-3" data-cat="equilibre" style="text-decoration: none; color: inherit;">
+        <div class="blog-card-img" style="height: 230px;">
+          <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=600&h=400&fit=crop&q=80" alt="Relation nourriture" loading="lazy">
+        </div>
+        <div style="padding: 28px 28px 32px;">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
+            <span style="font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; background: rgba(122,158,135,0.1); color: #7A9E87; padding: 4px 10px;">Équilibre</span>
+            <span style="font-size: 11px; color: #aaa;">6 min</span>
+          </div>
+          <h3 style="font-size: 1.3rem; font-weight: 500; line-height: 1.4; margin-bottom: 12px; letter-spacing: -0.01em;">5 signes que votre relation à la nourriture mérite d'être repensée</h3>
+          <p style="font-size: 0.82rem; color: #6B6B6B; line-height: 1.85; margin-bottom: 22px;">Culpabilité, obsession des calories, peur de certains aliments… et comment retrouver une relation apaisée avec ce que vous mangez.</p>
+          <div style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #C4A46B; font-weight: 500;">Lire →</div>
+        </div>
+      </a>
+
+      <!-- Article 4 — Recette -->
+      <a href="#" class="blog-card reveal reveal-delay-1" data-cat="recettes" style="text-decoration: none; color: inherit;">
+        <div class="blog-card-img" style="height: 230px;">
+          <img src="https://images.unsplash.com/photo-1574484284002-952d92456975?w=600&h=400&fit=crop&q=80" alt="Recette salade équilibrée" loading="lazy">
+        </div>
+        <div style="padding: 28px 28px 32px;">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
+            <span style="font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; background: rgba(122,158,135,0.1); color: #7A9E87; padding: 4px 10px;">Recettes</span>
+            <span style="font-size: 11px; color: #aaa;">3 min</span>
+          </div>
+          <h3 style="font-size: 1.3rem; font-weight: 500; line-height: 1.4; margin-bottom: 12px; letter-spacing: -0.01em;">Ma salade complète anti-fatigue (et anti-inflammatoire)</h3>
+          <p style="font-size: 0.82rem; color: #6B6B6B; line-height: 1.85; margin-bottom: 22px;">Épinards, quinoa, avocat, graines de courge, curcuma… une recette délicieuse, rassasiante et boostante à préparer en 10 minutes.</p>
+          <div style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #C4A46B; font-weight: 500;">Voir la recette →</div>
+        </div>
+      </a>
+
+      <!-- Article 5 — Ménopause -->
+      <a href="#" class="blog-card reveal reveal-delay-2" data-cat="menopause" style="text-decoration: none; color: inherit;">
+        <div class="blog-card-img" style="height: 230px;">
+          <img src="https://images.unsplash.com/photo-1550583724-b2692b85b150?w=600&h=400&fit=crop&q=80" alt="Ménopause prise de poids" loading="lazy">
+        </div>
+        <div style="padding: 28px 28px 32px;">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
+            <span style="font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; background: rgba(122,158,135,0.1); color: #7A9E87; padding: 4px 10px;">Ménopause</span>
+            <span style="font-size: 11px; color: #aaa;">8 min</span>
+          </div>
+          <h3 style="font-size: 1.3rem; font-weight: 500; line-height: 1.4; margin-bottom: 12px; letter-spacing: -0.01em;">Prise de poids à la ménopause : comprendre pour mieux agir</h3>
+          <p style="font-size: 0.82rem; color: #6B6B6B; line-height: 1.85; margin-bottom: 22px;">Cortisol, œstrogènes en baisse, résistance à l'insuline — pourquoi le corps change et comment adapter son alimentation sans se priver.</p>
+          <div style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #C4A46B; font-weight: 500;">Lire →</div>
+        </div>
+      </a>
+
+      <!-- Article 6 — Équilibre -->
+      <a href="#" class="blog-card reveal reveal-delay-3" data-cat="equilibre" style="text-decoration: none; color: inherit;">
+        <div class="blog-card-img" style="height: 230px;">
+          <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?w=600&h=400&fit=crop&q=80" alt="Manger sainement sans se priver" loading="lazy">
+        </div>
+        <div style="padding: 28px 28px 32px;">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
+            <span style="font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; background: rgba(122,158,135,0.1); color: #7A9E87; padding: 4px 10px;">Équilibre</span>
+            <span style="font-size: 11px; color: #aaa;">5 min</span>
+          </div>
+          <h3 style="font-size: 1.3rem; font-weight: 500; line-height: 1.4; margin-bottom: 12px; letter-spacing: -0.01em;">Manger sainement au restaurant sans stresser : mes conseils</h3>
+          <p style="font-size: 0.82rem; color: #6B6B6B; line-height: 1.85; margin-bottom: 22px;">La vie sociale ne doit pas être un frein à votre équilibre alimentaire. Voici comment aborder les repas à l'extérieur avec sérénité.</p>
+          <div style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #C4A46B; font-weight: 500;">Lire →</div>
+        </div>
+      </a>
+
+    </div><!-- end grid -->
+
+    <!-- Load more -->
+    <div style="text-align: center; margin-top: 64px;">
+      <button style="display: inline-flex; align-items: center; gap: 8px; border: 1.5px solid rgba(44,44,44,0.15); color: #6B6B6B; background: transparent; padding: 14px 36px; font-size: 13px; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: all 0.25s ease; font-family: 'Inter', sans-serif;" onmouseover="this.style.borderColor='#7A9E87';this.style.color='#7A9E87'" onmouseout="this.style.borderColor='rgba(44,44,44,0.15)';this.style.color='#6B6B6B'">
+        Charger plus d'articles
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════ NEWSLETTER ═══ -->
+<section style="background: #272727; padding: 96px 48px; position: relative; overflow: hidden;">
+  <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 600px; height: 400px; background: radial-gradient(ellipse, rgba(122,158,135,0.08) 0%, transparent 70%); pointer-events: none;"></div>
+
+  <div style="position: relative; max-width: 640px; margin: 0 auto; text-align: center;" class="reveal">
+    <div style="font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: #7A9E87; margin-bottom: 20px; font-weight: 500;">Newsletter</div>
+    <h2 style="font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 300; color: #FDFAF6; letter-spacing: -0.02em; margin-bottom: 16px;">
+      Des conseils <em style="font-style: italic; color: #C4A46B;">personnalisés</em><br>dans votre boîte mail
+    </h2>
+    <p style="font-size: 0.9rem; color: rgba(253,250,246,0.5); line-height: 1.85; margin-bottom: 40px;">
+      Chaque mois, un article de fond, une recette de saison et des conseils pratiques adaptés à la santé féminine.
+    </p>
+    <form style="display: flex; gap: 0; max-width: 480px; margin: 0 auto;" onsubmit="return false;">
+      <input type="email" placeholder="Votre adresse email" class="newsletter-input">
+      <button type="submit" class="btn-gold" style="border-radius: 0; white-space: nowrap; padding: 14px 28px;">S'inscrire</button>
+    </form>
+    <p style="font-size: 11px; color: rgba(253,250,246,0.3); margin-top: 16px;">Pas de spam. Désinscription possible à tout moment.</p>
+  </div>
+</section>
+
+<!-- ════════════════════════════ SIDEBAR CTA ═══ -->
+<section style="padding: 80px 48px; background: #F5EFE6;">
+  <div style="max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 32px;">
+    <div class="reveal" style="background: #FDFAF6; padding: 48px; border: 1px solid rgba(196,164,107,0.12); box-shadow: 0 2px 16px rgba(44,44,44,0.04);">
+      <div style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #7A9E87; margin-bottom: 16px;">Prendre rendez-vous</div>
+      <h3 style="font-size: 1.8rem; font-weight: 300; letter-spacing: -0.02em; margin-bottom: 16px; line-height: 1.3;">Une question nutritionnelle ? Parlons-en.</h3>
+      <p style="font-size: 0.875rem; color: #6B6B6B; line-height: 1.85; margin-bottom: 32px;">Première consultation 50€ (1h–1h15). En cabinet ou en visio selon vos disponibilités.</p>
+      <a href="https://www.doctolib.fr/dieteticien/le-pin/corinne-virot/booking" target="_blank" class="btn-primary" style="padding: 13px 32px; font-size: 12px;">Réserver sur Doctolib</a>
+    </div>
+    <div class="reveal reveal-delay-2" style="background: #272727; padding: 48px; position: relative; overflow: hidden;">
+      <div style="position: absolute; bottom: -20%; right: -10%; width: 300px; height: 300px; background: radial-gradient(circle, rgba(196,164,107,0.1) 0%, transparent 70%); pointer-events: none;"></div>
+      <div style="position: relative;">
+        <div style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #C4A46B; margin-bottom: 16px;">Mon approche</div>
+        <h3 style="font-size: 1.8rem; font-weight: 300; letter-spacing: -0.02em; margin-bottom: 16px; line-height: 1.3; color: #FDFAF6;">Sans régimes. Avec <em style="font-style: italic; color: #C4A46B;">bienveillance</em>.</h3>
+        <p style="font-size: 0.875rem; color: rgba(253,250,246,0.5); line-height: 1.85; margin-bottom: 32px;">Découvrez ma philosophie nutritionnelle et pourquoi elle donne des résultats durables là où les régimes échouent.</p>
+        <a href="approche.html" style="display: inline-flex; align-items: center; gap: 8px; border: 1.5px solid rgba(253,250,246,0.2); color: rgba(253,250,246,0.7); padding: 13px 32px; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; transition: all 0.25s ease;" onmouseover="this.style.borderColor='rgba(196,164,107,0.6)';this.style.color='#C4A46B'" onmouseout="this.style.borderColor='rgba(253,250,246,0.2)';this.style.color='rgba(253,250,246,0.7)'">Découvrir l'approche →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ FOOTER ═══ -->
+<footer style="background: #1E1E1E; padding: 72px 48px 36px;">
+  <div style="max-width: 1280px; margin: 0 auto;">
+    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 56px; margin-bottom: 56px;">
+      <div>
+        <div style="font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 400; color: #FDFAF6; margin-bottom: 4px;">Corinne <span style="color: #7A9E87;">Virot</span></div>
+        <div style="font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(253,250,246,0.35); margin-bottom: 20px;">Diététicienne-Nutritionniste</div>
+        <p style="font-size: 0.825rem; color: rgba(253,250,246,0.4); line-height: 1.85; max-width: 255px;">Accompagnement nutritionnel personnalisé, spécialisé en santé féminine. Sans régimes, sans frustration.</p>
+      </div>
+      <div>
+        <div style="font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(253,250,246,0.35); margin-bottom: 22px;">Navigation</div>
+        <div style="display: flex; flex-direction: column; gap: 13px;">
+          <a href="index.html" style="font-size: 0.875rem; color: rgba(253,250,246,0.5); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#7A9E87'" onmouseout="this.style.color='rgba(253,250,246,0.5)'">Accueil</a>
+          <a href="consultations.html" style="font-size: 0.875rem; color: rgba(253,250,246,0.5); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#7A9E87'" onmouseout="this.style.color='rgba(253,250,246,0.5)'">Consultations</a>
+          <a href="approche.html" style="font-size: 0.875rem; color: rgba(253,250,246,0.5); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#7A9E87'" onmouseout="this.style.color='rgba(253,250,246,0.5)'">Mon Approche</a>
+          <a href="blog.html" style="font-size: 0.875rem; color: #7A9E87; text-decoration: none;">Blog</a>
+          <a href="contact.html" style="font-size: 0.875rem; color: rgba(253,250,246,0.5); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#7A9E87'" onmouseout="this.style.color='rgba(253,250,246,0.5)'">Contact</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(253,250,246,0.35); margin-bottom: 22px;">Cabinets</div>
+        <div style="display: flex; flex-direction: column; gap: 18px;">
+          <div>
+            <div style="font-size: 12px; color: #7A9E87; margin-bottom: 5px; font-weight: 500;">Germigny-l'Évêque</div>
+            <div style="font-size: 0.8rem; color: rgba(253,250,246,0.35); line-height: 1.65;">1 bis Chemin du Boulet</div>
+          </div>
+          <div>
+            <div style="font-size: 12px; color: #7A9E87; margin-bottom: 5px; font-weight: 500;">Le Pin</div>
+            <div style="font-size: 0.8rem; color: rgba(253,250,246,0.35); line-height: 1.65;">Pôle de Santé<br>25 Rue de Courtry, 77181</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(253,250,246,0.35); margin-bottom: 22px;">Contact</div>
+        <div style="display: flex; flex-direction: column; gap: 14px;">
+          <a href="tel:0766361504" style="font-size: 0.875rem; color: rgba(253,250,246,0.5); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#C4A46B'" onmouseout="this.style.color='rgba(253,250,246,0.5)'">07 66 36 15 04</a>
+          <a href="https://www.doctolib.fr/dieteticien/le-pin/corinne-virot/booking" target="_blank" style="font-size: 0.875rem; color: #C4A46B; text-decoration: none; font-weight: 500;">Réserver sur Doctolib →</a>
+        </div>
+      </div>
+    </div>
+    <div style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 28px; display: flex; justify-content: space-between; align-items: center;">
+      <div style="font-size: 12px; color: rgba(253,250,246,0.22);">© 2024 Corinne Virot — Diététicienne-Nutritionniste</div>
+      <div style="font-size: 12px; color: rgba(253,250,246,0.22);">Mentions légales · N° ADELI</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 60) nav.classList.add('nav-scrolled');
+    else nav.classList.remove('nav-scrolled');
+  }, { passive: true });
+
+  // Reveal observer
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Category filter
+  function filterCat(btn, cat) {
+    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('#articles-grid .blog-card').forEach(card => {
+      if (cat === 'all' || card.dataset.cat === cat) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+</script>
+</body>
+</html>

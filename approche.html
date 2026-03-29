@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mon Approche — Corinne Virot, Diététicienne</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background-color: #F5EFE6; color: #2C2C2C; margin: 0; }
+    h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    }
+
+    nav a { transition: color 0.2s ease; }
+    nav a:hover { color: #7A9E87; }
+    nav a.active { color: #7A9E87; border-bottom: 1px solid #7A9E87; padding-bottom: 2px; }
+
+    .btn-primary {
+      display: inline-block; background: #7A9E87; color: #FDFAF6;
+      padding: 14px 36px; font-family: 'Inter', sans-serif; font-size: 13px;
+      font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+      text-decoration: none; transition: background 0.25s cubic-bezier(0.34,1.56,0.64,1), transform 0.2s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease;
+      box-shadow: 0 4px 14px rgba(122,158,135,0.25);
+    }
+    .btn-primary:hover { background: #5D7E6A; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(122,158,135,0.35); }
+    .btn-primary:active { transform: translateY(0); }
+    .btn-primary:focus-visible { outline: 2px solid #7A9E87; outline-offset: 3px; }
+
+    .pillar-card {
+      padding: 48px 40px;
+      background: #FDFAF6;
+      border: 1px solid rgba(196,164,107,0.12);
+      box-shadow: 0 2px 12px rgba(44,44,44,0.04);
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease;
+    }
+    .pillar-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 36px rgba(122,158,135,0.1), 0 4px 10px rgba(44,44,44,0.05);
+    }
+
+    .step-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 80px;
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header style="background: rgba(253,250,246,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(196,164,107,0.15); position: sticky; top: 0; z-index: 100;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 40px; display: flex; align-items: center; justify-content: space-between; height: 72px;">
+      <a href="index.html" style="text-decoration: none; display: flex; flex-direction: column; line-height: 1.1;">
+        <span style="font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 500; color: #2C2C2C; letter-spacing: -0.01em;">Corinne Virot</span>
+        <span style="font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 400; color: #7A9E87; letter-spacing: 0.12em; text-transform: uppercase;">Diététicienne-Nutritionniste</span>
+      </a>
+      <nav style="display: flex; gap: 40px; align-items: center;">
+        <a href="index.html" style="font-size: 13px; font-weight: 400; color: #2C2C2C; text-decoration: none; letter-spacing: 0.04em;">Accueil</a>
+        <a href="consultations.html" style="font-size: 13px; font-weight: 400; color: #2C2C2C; text-decoration: none; letter-spacing: 0.04em;">Consultations</a>
+        <a href="approche.html" class="active" style="font-size: 13px; font-weight: 400; color: #2C2C2C; text-decoration: none; letter-spacing: 0.04em;">Mon approche</a>
+        <a href="blog.html" style="font-size: 13px; font-weight: 400; color: #2C2C2C; text-decoration: none; letter-spacing: 0.04em;">Blog</a>
+        <a href="contact.html" style="font-size: 13px; font-weight: 400; color: #2C2C2C; text-decoration: none; letter-spacing: 0.04em;">Contact</a>
+        <a href="https://www.doctolib.fr/dieteticien/le-pin/corinne-virot/booking" target="_blank" class="btn-primary" style="padding: 10px 24px; font-size: 11px;">Prendre RDV</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- PAGE HERO -->
+  <section style="padding: 80px 40px 0; background: #F5EFE6; position: relative; overflow: hidden;">
+    <div style="position: absolute; top: -20%; right: -5%; width: 45%; height: 140%; background: radial-gradient(ellipse, rgba(196,164,107,0.08) 0%, transparent 60%); pointer-events: none;"></div>
+    <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end; position: relative;">
+      <div style="padding-bottom: 80px;">
+        <p style="font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #C4A46B; margin-bottom: 16px;">Philosophie & méthode</p>
+        <h1 style="font-size: clamp(44px, 5vw, 68px); font-weight: 300; line-height: 1.08; letter-spacing: -0.03em; color: #2C2C2C; margin-bottom: 28px;">
+          Mon<br/><em style="color: #7A9E87; font-style: italic;">approche</em>
+        </h1>
+        <p style="font-size: 16px; font-weight: 300; line-height: 1.8; color: #6B6B6B; max-width: 480px;">
+          Je crois en une diététique bienveillante, loin des régimes et de la privation. Mon objectif : vous aider à (re)trouver un rapport apaisé à l'alimentation, qui respecte votre corps et votre mode de vie.
+        </p>
+      </div>
+      <!-- Pull quote -->
+      <div style="padding-bottom: 80px; display: flex; align-items: flex-end;">
+        <div style="background: #EDE4D6; padding: 48px 44px; position: relative;">
+          <div style="position: absolute; top: -1px; left: 0; width: 40px; height: 3px; background: #C4A46B;"></div>
+          <p style="font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 300; font-style: italic; line-height: 1.5; color: #2C2C2C; margin-bottom: 20px;">
+            "La diététique a longtemps été associée à l'idée de privation, de régimes stricts et de contraintes. Je crois en une autre façon de faire."
+          </p>
+          <p style="font-size: 13px; color: #7A9E87; font-weight: 500; letter-spacing: 0.06em;">— Corinne Virot</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MA PHILOSOPHIE -->
+  <section style="padding: 100px 0; background: #EDE4D6;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 40px;">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center;">
+        <div>
+          <p style="font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #C4A46B; margin-bottom: 16px;">À propos de moi</p>
+          <h2 style="font-size: clamp(32px, 3.5vw, 48px); font-weight: 300; line-height: 1.2; letter-spacing: -0.02em; color: #2C2C2C; margin-bottom: 28px;">
+            Un parcours guidé par<br/><em style="color: #7A9E87; font-style: italic;">la passion</em>
+          </h2>
+          <p style="font-size: 15px; font-weight: 300; line-height: 1.85; color: #6B6B6B; margin-bottom: 24px;">
+            Diététicienne-nutritionniste diplômée, j'ai choisi cette voie par conviction : l'alimentation est bien plus qu'une question de calories. C'est un vecteur de santé, de plaisir et de bien-être global.
+          </p>
+          <p style="font-size: 15px; font-weight: 300; line-height: 1.85; color: #6B6B6B; margin-bottom: 24px;">
+            Spécialisée dans la santé féminine, j'accompagne les femmes face aux défis nutritionnels spécifiques à leur physiologie : ménopause, endométriose, syndrome des ovaires polykystiques (SOPK) et bien d'autres problématiques liées au cycle de vie féminin.
+          </p>
+          <p style="font-size: 15px; font-weight: 300; line-height: 1.85; color: #6B6B6B;">
+            Je reçois en cabinet à Germigny-l'Évêque et au Pôle de Santé du Pin, ainsi qu'en consultation visio pour plus de flexibilité.
+          </p>
+        </div>
+        <div style="position: relative;">
+          <div style="position: absolute; bottom: -20px; right: -20px; width: 80%; height: 80%; background: rgba(122,158,135,0.08); border-radius: 2px;"></div>
+          <div style="position: relative; overflow: hidden; border-radius: 2px;">
+            <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=600&h=700&fit=crop&q=80" alt="Corinne Virot, diététicienne-nutritionniste" style="width: 100%; display: block;" />
+            <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(44,44,44,0.2) 0%, transparent 50%);"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LES PILIERS -->
+  <section style="padding: 100px 0; background: #F5EFE6;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 40px;">
+      <div style="text-align: center; max-width: 540px; margin: 0 auto 72px;">
+        <p style="font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #C4A46B; margin-bottom: 16px;">Les piliers de ma méthode</p>
+        <h2 style="font-size: clamp(34px, 3.5vw, 52px); font-weight: 300; line-height: 1.15; letter-spacing: -0.02em; color: #2C2C2C;">Une méthode <em style="color: #7A9E87; font-style: italic;">humaine</em> et concrète</h2>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;">
+
+        <div class="pillar-card">
+          <div style="display: flex; align-items: flex-start; gap: 24px;">
+            <div style="flex-shrink: 0;">
+              <p class="step-number" style="color: rgba(122,158,135,0.2);">01</p>
+            </div>
+            <div style="padding-top: 8px;">
+              <h3 style="font-size: 26px; font-weight: 400; color: #2C2C2C; margin-bottom: 14px; letter-spacing: -0.01em;">Écoute & personnalisation</h3>
+              <p style="font-size: 14px; font-weight: 300; line-height: 1.8; color: #6B6B6B;">
+                Chaque personne est unique. Je prends le temps de comprendre vos habitudes, vos contraintes et vos goûts pour construire un accompagnement qui vous ressemble vraiment — pas un programme standardisé.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="pillar-card">
+          <div style="display: flex; align-items: flex-start; gap: 24px;">
+            <div style="flex-shrink: 0;">
+              <p class="step-number" style="color: rgba(196,164,107,0.2);">02</p>
+            </div>
+            <div style="padding-top: 8px;">
+              <h3 style="font-size: 26px; font-weight: 400; color: #2C2C2C; margin-bottom: 14px; letter-spacing: -0.01em;">Zéro privation</h3>
+              <p style="font-size: 14px; font-weight: 300; line-height: 1.8; color: #6B6B6B;">
+                Je refuse le modèle de la restriction. Mon approche s'appuie sur la compréhension des besoins réels de votre corps, pas sur la frustration. Manger devrait rester un plaisir.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="pillar-card">
+          <div style="display: flex; align-items: flex-start; gap: 24px;">
+            <div style="flex-shrink: 0;">
+              <p class="step-number" style="color: rgba(122,158,135,0.2);">03</p>
+            </div>
+            <div style="padding-top: 8px;">
+              <h3 style="font-size: 26px; font-weight: 400; color: #2C2C2C; margin-bottom: 14px; letter-spacing: -0.01em;">Objectifs progressifs</h3>
+              <p style="font-size: 14px; font-weight: 300; line-height: 1.8; color: #6B6B6B;">
+                Nous définissons ensemble des objectifs réalistes, mis en œuvre progressivement au fil des séances. Pas de changements brutaux — mais une évolution douce et durable.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="pillar-card">
+          <div style="display: flex; align-items: flex-start; gap: 24px;">
+            <div style="flex-shrink: 0;">
+              <p class="step-number" style="color: rgba(196,164,107,0.2);">04</p>
+            </div>
+            <div style="padding-top: 8px;">
+              <h3 style="font-size: 26px; font-weight: 400; color: #2C2C2C; margin-bottom: 14px; letter-spacing: -0.01em;">Bien-être global</h3>
+              <p style="font-size: 14px; font-weight: 300; line-height: 1.8; color: #6B6B6B;">
+                Santé physique et mentale sont indissociables. Mon suivi intègre ces deux dimensions pour un bien-être complet — parce que l'alimentation touche bien plus que le corps.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SPÉCIALISATION FEMMES -->
+  <section style="padding: 100px 0; background: #2C2C2C; position: relative; overflow: hidden;">
+    <div style="position: absolute; inset: 0; pointer-events: none;">
+      <div style="position: absolute; top: -30%; left: -10%; width: 60%; height: 160%; background: radial-gradient(ellipse, rgba(122,158,135,0.1) 0%, transparent 60%);"></div>
+      <div style="position: absolute; bottom: -30%; right: -10%; width: 50%; height: 140%; background: radial-gradient(ellipse, rgba(196,164,107,0.07) 0%, transparent 60%);"></div>
+    </div>
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 40px; position: relative;">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center;">
+        <div>
+          <p style="font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #C4A46B; margin-bottom: 16px;">Expertise spécifique</p>
+          <h2 style="font-size: clamp(34px, 3.5vw, 52px); font-weight: 300; line-height: 1.15; letter-spacing: -0.02em; color: #FDFAF6; margin-bottom: 28px;">
+            Spécialisée en<br/><em style="color: #7A9E87; font-style: italic;">santé féminine</em>
+          </h2>
+          <p style="font-size: 15px; font-weight: 300; line-height: 1.85; color: rgba(253,250,246,0.65); margin-bottom: 32px;">
+            Le corps féminin traverse des étapes physiologiques complexes qui impactent directement les besoins nutritionnels. J'ai développé une expertise approfondie pour accompagner les femmes dans ces moments-clés.
+          </p>
+          <a href="consultations.html" class="btn-primary" style="margin-top: 8px;">Voir les consultations</a>
+        </div>
+
+        <!-- Specializations -->
+        <div style="display: flex; flex-direction: column; gap: 2px;">
+          <div style="padding: 28px 32px; border: 1px solid rgba(253,250,246,0.08); background: rgba(253,250,246,0.04); transition: background 0.2s;" onmouseover="this.style.background='rgba(122,158,135,0.08)'" onmouseout="this.style.background='rgba(253,250,246,0.04)'">
+            <h3 style="font-size: 20px; font-weight: 400; color: #FDFAF6; margin-bottom: 8px; letter-spacing: -0.01em;">Ménopause</h3>
+            <p style="font-size: 13px; font-weight: 300; color: rgba(253,250,246,0.5); line-height: 1.65;">Adapter son alimentation pour traverser cette étape avec sérénité — gestion du poids, bouffées de chaleur, protection osseuse.</p>
+          </div>
+          <div style="padding: 28px 32px; border: 1px solid rgba(253,250,246,0.08); background: rgba(253,250,246,0.04); transition: background 0.2s;" onmouseover="this.style.background='rgba(122,158,135,0.08)'" onmouseout="this.style.background='rgba(253,250,246,0.04)'">
+            <h3 style="font-size: 20px; font-weight: 400; color: #FDFAF6; margin-bottom: 8px; letter-spacing: -0.01em;">Endométriose</h3>
+            <p style="font-size: 13px; font-weight: 300; color: rgba(253,250,246,0.5); line-height: 1.65;">Une alimentation anti-inflammatoire ciblée pour réduire les symptômes et améliorer la qualité de vie au quotidien.</p>
+          </div>
+          <div style="padding: 28px 32px; border: 1px solid rgba(253,250,246,0.08); background: rgba(253,250,246,0.04); transition: background 0.2s;" onmouseover="this.style.background='rgba(122,158,135,0.08)'" onmouseout="this.style.background='rgba(253,250,246,0.04)'">
+            <h3 style="font-size: 20px; font-weight: 400; color: #FDFAF6; margin-bottom: 8px; letter-spacing: -0.01em;">SOPK</h3>
+            <p style="font-size: 13px; font-weight: 300; color: rgba(253,250,246,0.5); line-height: 1.65;">Stratégies nutritionnelles pour équilibrer les hormones, gérer la résistance à l'insuline et retrouver un équilibre hormonal.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="padding: 100px 40px; background: #EDE4D6; text-align: center;">
+    <div style="max-width: 580px; margin: 0 auto;">
+      <p style="font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #C4A46B; margin-bottom: 16px;">Commencer ensemble</p>
+      <h2 style="font-size: clamp(34px, 4vw, 54px); font-weight: 300; line-height: 1.15; letter-spacing: -0.02em; color: #2C2C2C; margin-bottom: 24px;">
+        Prête à faire le<br/><em style="color: #7A9E87; font-style: italic;">premier pas</em> ?
+      </h2>
+      <p style="font-size: 15px; font-weight: 300; line-height: 1.75; color: #6B6B6B; margin-bottom: 44px;">Prenez rendez-vous pour votre première consultation et commençons ensemble votre parcours personnalisé.</p>
+      <a href="https://www.doctolib.fr/dieteticien/le-pin/corinne-virot/booking" target="_blank" class="btn-primary">Réserver sur Doctolib</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="background: #2C2C2C; border-top: 1px solid rgba(253,250,246,0.08); padding: 60px 40px 36px;">
+    <div style="max-width: 1200px; margin: 0 auto;">
+      <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 56px;">
+        <div>
+          <p style="font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 500; color: #FDFAF6; margin-bottom: 6px;">Corinne Virot</p>
+          <p style="font-size: 11px; color: #7A9E87; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 20px;">Diététicienne-Nutritionniste</p>
+          <p style="font-size: 13px; color: rgba(253,250,246,0.5); line-height: 1.75; max-width: 260px;">Spécialisée en santé féminine — ménopause, endométriose, SOPK — en Seine-et-Marne.</p>
+        </div>
+        <div>
+          <p style="font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(253,250,246,0.4); margin-bottom: 20px;">Navigation</p>
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <a href="index.html" style="font-size: 13px; color: rgba(253,250,246,0.65); text-decoration: none;" onmouseover="this.style.color='#7A9E87'" onmouseout="this.style.color='rgba(253,250,246,0.65)'">Accueil</a>
+            <a href="consultations.html" style="font-size: 13px; color: rgba(253,250,246,0.65); text-decoration: none;" onmouseover="this.style.color='#7A9E87'" onmouseout="this.style.color='rgba(253,250,246,0.65)'">Consultations</a>
+            <a href="approche.html" style="font-size: 13px; color: rgba(253,250,246,0.65); text-decoration: none;" onmouseover="this.style.color='#7A9E87'" onmouseout="this.style.color='rgba(253,250,246,0.65)'">Mon approche</a>
+            <a href="blog.html" style="font-size: 13px; color: rgba(253,250,246,0.65); text-decoration: none;" onmouseover="this.style.color='#7A9E87'" onmouseout="this.style.color='rgba(253,250,246,0.65)'">Blog</a>
+            <a href="contact.html" style="font-size: 13px; color: rgba(253,250,246,0.65); text-decoration: none;" onmouseover="this.style.color='#7A9E87'" onmouseout="this.style.color='rgba(253,250,246,0.65)'">Contact</a>
+          </div>
+        </div>
+        <div>
+          <p style="font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(253,250,246,0.4); margin-bottom: 20px;">Contact</p>
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <a href="tel:0766361504" style="font-size: 13px; color: rgba(253,250,246,0.65); text-decoration: none;">07 66 36 15 04</a>
+            <p style="font-size: 13px; color: rgba(253,250,246,0.5); line-height: 1.6;">Germigny-l'Évêque<br/>Le Pin (77)</p>
+          </div>
+        </div>
+        <div>
+          <p style="font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(253,250,246,0.4); margin-bottom: 20px;">Réseaux</p>
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <a href="https://www.instagram.com/corinne.diet/" target="_blank" style="font-size: 13px; color: rgba(253,250,246,0.65); text-decoration: none;" onmouseover="this.style.color='#7A9E87'" onmouseout="this.style.color='rgba(253,250,246,0.65)'">Instagram</a>
+            <a href="https://www.facebook.com/corinne.virot.9/" target="_blank" style="font-size: 13px; color: rgba(253,250,246,0.65); text-decoration: none;" onmouseover="this.style.color='#7A9E87'" onmouseout="this.style.color='rgba(253,250,246,0.65)'">Facebook</a>
+            <a href="https://www.doctolib.fr/dieteticien/le-pin/corinne-virot/booking" target="_blank" style="font-size: 13px; color: #7A9E87; text-decoration: none;">Doctolib →</a>
+          </div>
+        </div>
+      </div>
+      <div style="border-top: 1px solid rgba(253,250,246,0.08); padding-top: 28px; display: flex; justify-content: space-between; align-items: center;">
+        <p style="font-size: 12px; color: rgba(253,250,246,0.3);">© 2025 Corinne Virot — Diététicienne-Nutritionniste</p>
+        <p style="font-size: 12px; color: rgba(253,250,246,0.3);">Seine-et-Marne (77)</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
