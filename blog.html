@@ -80,9 +80,67 @@
     .newsletter-input { flex: 1; padding: 14px 20px; font-size: 13px; border: 1px solid rgba(44,44,44,0.15); background: #FDFAF6; color: #2C2C2C; outline: none; font-family: 'Inter', sans-serif; transition: border-color 0.2s ease; }
     .newsletter-input:focus { border-color: #7A9E87; }
     .newsletter-input::placeholder { color: #aaa; }
+
+    /* ── Hamburger ── */
+    #hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:4px; z-index:110; }
+    .ham-line { width:22px; height:1.5px; background:#2C2C2C; display:block; transition:all 0.3s ease; transform-origin:center; }
+    #hamburger.open .ham-line:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
+    #hamburger.open .ham-line:nth-child(2) { opacity:0; }
+    #hamburger.open .ham-line:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); width:22px; }
+
+    /* ── Mobile menu ── */
+    #mobile-menu { display:none; position:fixed; inset:0; background:rgba(245,239,230,0.98); z-index:105; flex-direction:column; justify-content:center; align-items:center; gap:28px; padding:80px 40px; backdrop-filter:blur(12px); }
+    #mobile-menu.open { display:flex; }
+    #mobile-menu a { font-family:'Cormorant Garamond',serif; font-size:2rem; font-weight:300; color:#2C2C2C; text-decoration:none; transition:color 0.2s; }
+    #mobile-menu a:hover { color:#7A9E87; }
+    #mobile-menu .mobile-rdv { font-family:'Inter',sans-serif; font-size:13px; margin-top:16px; }
+
+    @media (max-width: 768px) {
+      #nav-links { display:none !important; }
+      #hamburger { display:flex !important; }
+      #main-nav { padding:0 20px !important; }
+
+      /* Hero */
+      .blog-hero-inner { padding:56px 24px 64px !important; }
+
+      /* Featured article */
+      #featured-grid { grid-template-columns:1fr !important; }
+      .featured-img { height:260px !important; }
+
+      /* Articles grid */
+      #articles-grid { grid-template-columns:1fr !important; }
+
+      /* Sections */
+      .blog-section { padding-left:24px !important; padding-right:24px !important; padding-top:64px !important; padding-bottom:64px !important; }
+
+      /* Sidebar CTA */
+      #sidebar-cta-grid { grid-template-columns:1fr !important; }
+
+      /* Newsletter form */
+      #newsletter-form { flex-direction:column !important; }
+      .newsletter-input { width:100% !important; }
+
+      /* Footer */
+      footer { padding:56px 24px 32px !important; }
+      #footer-grid { grid-template-columns:1fr 1fr !important; gap:36px !important; }
+      #footer-brand { grid-column:1 / -1 !important; }
+    }
+    @media (max-width: 480px) {
+      #footer-grid { grid-template-columns:1fr !important; }
+    }
   </style>
 </head>
 <body>
+
+<!-- MOBILE MENU -->
+<div id="mobile-menu">
+  <a href="index.html">Accueil</a>
+  <a href="consultations.html">Consultations</a>
+  <a href="approche.html">Mon Approche</a>
+  <a href="blog.html">Blog</a>
+  <a href="contact.html">Contact</a>
+  <a href="https://www.doctolib.fr/dieteticien/le-pin/corinne-virot/booking" target="_blank" class="btn-primary mobile-rdv">Prendre RDV sur Doctolib</a>
+</div>
 
 <!-- NAV -->
 <nav id="main-nav" style="position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(245,239,230,0.96); transition: all 0.3s ease; padding: 0 48px;">
@@ -91,7 +149,7 @@
       <span style="font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 400; color: #2C2C2C; letter-spacing: 0.02em;">Corinne <span style="color: #7A9E87;">Virot</span></span>
       <div style="font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #6B6B6B; margin-top: 1px;">Diététicienne-Nutritionniste</div>
     </a>
-    <div style="display: flex; align-items: center; gap: 36px;">
+    <div id="nav-links" style="display: flex; align-items: center; gap: 36px;">
       <a href="index.html" style="font-size: 13px; letter-spacing: 0.05em; color: #2C2C2C; text-decoration: none;">Accueil</a>
       <a href="consultations.html" style="font-size: 13px; letter-spacing: 0.05em; color: #2C2C2C; text-decoration: none;">Consultations</a>
       <a href="approche.html" style="font-size: 13px; letter-spacing: 0.05em; color: #2C2C2C; text-decoration: none;">Mon Approche</a>
@@ -99,6 +157,9 @@
       <a href="contact.html" style="font-size: 13px; letter-spacing: 0.05em; color: #2C2C2C; text-decoration: none;">Contact</a>
       <a href="https://www.doctolib.fr/dieteticien/le-pin/corinne-virot/booking" target="_blank" class="btn-primary" style="padding: 11px 24px;">Prendre RDV</a>
     </div>
+    <button id="hamburger" onclick="toggleMenu()" aria-label="Ouvrir le menu">
+      <span class="ham-line"></span><span class="ham-line"></span><span class="ham-line" style="width:16px;"></span>
+    </button>
   </div>
 </nav>
 
@@ -400,6 +461,19 @@
       }
     });
   }
+
+  // Hamburger
+  function toggleMenu() {
+    const menu = document.getElementById('mobile-menu');
+    const btn = document.getElementById('hamburger');
+    menu.classList.toggle('open');
+    btn.classList.toggle('open');
+    document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+  }
+
+  // Nav scroll
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => { nav.classList.toggle('nav-scrolled', window.scrollY > 60); }, { passive:true });
 </script>
 </body>
 </html>

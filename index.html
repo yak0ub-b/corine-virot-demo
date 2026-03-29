@@ -12,16 +12,8 @@
     tailwind.config = {
       theme: {
         extend: {
-          colors: {
-            cream: '#F5EFE6', creamDark: '#EDE4D6',
-            sage: '#7A9E87', sageDark: '#5D7E6A',
-            gold: '#C4A46B', goldDark: '#A8854A',
-            ink: '#2C2C2C', muted: '#6B6B6B', elevated: '#FDFAF6',
-          },
-          fontFamily: {
-            display: ['Cormorant Garamond', 'Georgia', 'serif'],
-            body: ['Inter', 'system-ui', 'sans-serif'],
-          },
+          colors: { cream:'#F5EFE6',creamDark:'#EDE4D6',sage:'#7A9E87',sageDark:'#5D7E6A',gold:'#C4A46B',goldDark:'#A8854A',ink:'#2C2C2C',muted:'#6B6B6B',elevated:'#FDFAF6' },
+          fontFamily: { display:['Cormorant Garamond','Georgia','serif'], body:['Inter','system-ui','sans-serif'] },
         },
       },
     };
@@ -29,476 +21,330 @@
   <style>
     * { box-sizing: border-box; }
     body { font-family: 'Inter', sans-serif; background-color: #F5EFE6; color: #2C2C2C; line-height: 1.7; overflow-x: hidden; }
-    h1, h2, h3, h4, h5 { font-family: 'Cormorant Garamond', serif; }
+    h1,h2,h3,h4,h5 { font-family: 'Cormorant Garamond', serif; }
 
-    /* Grain texture */
     body::before {
-      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.03;
+      content:''; position:fixed; inset:0; pointer-events:none; z-index:9999; opacity:0.03;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
     }
 
-    /* Nav */
     .nav-scrolled { backdrop-filter: blur(16px); background: rgba(245,239,230,0.88) !important; box-shadow: 0 1px 24px rgba(44,44,44,0.07); }
     nav a { transition: color 0.2s ease; }
     nav a:hover { color: #7A9E87; }
     nav a.active { color: #7A9E87; border-bottom: 1px solid #7A9E87; padding-bottom: 2px; }
 
-    /* Buttons */
-    .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: #7A9E87; color: #FDFAF6; padding: 15px 36px; font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1); box-shadow: 0 4px 20px rgba(122,158,135,0.3); }
-    .btn-primary:hover { background: #5D7E6A; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(122,158,135,0.4); }
-    .btn-primary:active { transform: translateY(0); }
+    .btn-primary { display:inline-flex; align-items:center; gap:8px; background:#7A9E87; color:#FDFAF6; padding:15px 36px; font-size:13px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; text-decoration:none; transition:all 0.25s cubic-bezier(0.34,1.56,0.64,1); box-shadow:0 4px 20px rgba(122,158,135,0.3); }
+    .btn-primary:hover { background:#5D7E6A; transform:translateY(-2px); box-shadow:0 8px 30px rgba(122,158,135,0.4); }
+    .btn-primary:active { transform:translateY(0); }
 
-    .btn-gold { display: inline-flex; align-items: center; gap: 8px; background: #C4A46B; color: #FDFAF6; padding: 15px 36px; font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1); box-shadow: 0 4px 20px rgba(196,164,107,0.35); }
-    .btn-gold:hover { background: #A8854A; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(196,164,107,0.45); }
-    .btn-gold:active { transform: translateY(0); }
+    .btn-gold { display:inline-flex; align-items:center; gap:8px; background:#C4A46B; color:#FDFAF6; padding:15px 36px; font-size:13px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; text-decoration:none; transition:all 0.25s cubic-bezier(0.34,1.56,0.64,1); box-shadow:0 4px 20px rgba(196,164,107,0.35); }
+    .btn-gold:hover { background:#A8854A; transform:translateY(-2px); }
+    .btn-gold:active { transform:translateY(0); }
 
-    .btn-outline { display: inline-flex; align-items: center; gap: 8px; border: 1.5px solid #C4A46B; color: #C4A46B; padding: 14px 34px; font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1); }
-    .btn-outline:hover { background: #C4A46B; color: #FDFAF6; transform: translateY(-2px); }
-    .btn-outline:active { transform: translateY(0); }
+    .btn-outline { display:inline-flex; align-items:center; gap:8px; border:1.5px solid #C4A46B; color:#C4A46B; padding:14px 34px; font-size:13px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; text-decoration:none; transition:all 0.25s cubic-bezier(0.34,1.56,0.64,1); }
+    .btn-outline:hover { background:#C4A46B; color:#FDFAF6; transform:translateY(-2px); }
+    .btn-outline:active { transform:translateY(0); }
 
-    /* Scroll reveal */
-    .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s cubic-bezier(0.25,0.46,0.45,0.94), transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94); }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-    .reveal-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.7s cubic-bezier(0.25,0.46,0.45,0.94), transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94); }
-    .reveal-left.visible { opacity: 1; transform: translateX(0); }
-    .reveal-right { opacity: 0; transform: translateX(40px); transition: opacity 0.7s cubic-bezier(0.25,0.46,0.45,0.94), transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94); }
-    .reveal-right.visible { opacity: 1; transform: translateX(0); }
-    .reveal-delay-1 { transition-delay: 0.1s; }
-    .reveal-delay-2 { transition-delay: 0.2s; }
-    .reveal-delay-3 { transition-delay: 0.3s; }
-    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal { opacity:0; transform:translateY(28px); transition:opacity 0.7s cubic-bezier(0.25,0.46,0.45,0.94),transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94); }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+    .reveal-left { opacity:0; transform:translateX(-40px); transition:opacity 0.7s cubic-bezier(0.25,0.46,0.45,0.94),transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94); }
+    .reveal-left.visible { opacity:1; transform:translateX(0); }
+    .reveal-right { opacity:0; transform:translateX(40px); transition:opacity 0.7s cubic-bezier(0.25,0.46,0.45,0.94),transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94); }
+    .reveal-right.visible { opacity:1; transform:translateX(0); }
+    .reveal-delay-1 { transition-delay:0.1s; }
+    .reveal-delay-2 { transition-delay:0.2s; }
+    .reveal-delay-3 { transition-delay:0.3s; }
 
-    /* Cards */
-    .service-card { background: #FDFAF6; border: 1px solid rgba(196,164,107,0.12); padding: 36px 28px; transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease; box-shadow: 0 2px 12px rgba(44,44,44,0.04); }
-    .service-card:hover { transform: translateY(-8px); box-shadow: 0 16px 40px rgba(122,158,135,0.15), 0 4px 12px rgba(44,44,44,0.06); }
+    .service-card { background:#FDFAF6; border:1px solid rgba(196,164,107,0.12); padding:36px 28px; transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1),box-shadow 0.3s ease; box-shadow:0 2px 12px rgba(44,44,44,0.04); }
+    .service-card:hover { transform:translateY(-8px); box-shadow:0 16px 40px rgba(122,158,135,0.15),0 4px 12px rgba(44,44,44,0.06); }
 
-    .testimonial-card { background: #FDFAF6; padding: 36px; box-shadow: 0 4px 24px rgba(44,44,44,0.05); border: 1px solid rgba(196,164,107,0.1); transition: transform 0.3s ease, box-shadow 0.3s ease; }
-    .testimonial-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(44,44,44,0.08); }
+    .testimonial-card { background:#FDFAF6; padding:36px; box-shadow:0 4px 24px rgba(44,44,44,0.05); border:1px solid rgba(196,164,107,0.1); transition:transform 0.3s ease,box-shadow 0.3s ease; }
+    .testimonial-card:hover { transform:translateY(-4px); box-shadow:0 8px 32px rgba(44,44,44,0.08); }
 
-    .pain-card { border: 1px solid rgba(255,255,255,0.07); padding: 36px 28px; background: rgba(255,255,255,0.03); transition: background 0.3s ease, border-color 0.3s ease; }
-    .pain-card:hover { background: rgba(255,255,255,0.07); border-color: rgba(196,164,107,0.3); }
+    .pain-card { border:1px solid rgba(255,255,255,0.07); padding:36px 28px; background:rgba(255,255,255,0.03); transition:background 0.3s ease,border-color 0.3s ease; }
+    .pain-card:hover { background:rgba(255,255,255,0.07); border-color:rgba(196,164,107,0.3); }
 
-    /* Blog cards */
-    .blog-card { background: #FDFAF6; overflow: hidden; transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease; box-shadow: 0 2px 12px rgba(44,44,44,0.04); }
-    .blog-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(44,44,44,0.1); }
-    .blog-card-img { overflow: hidden; height: 220px; }
-    .blog-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94); }
-    .blog-card:hover .blog-card-img img { transform: scale(1.07); }
+    .blog-card { background:#FDFAF6; overflow:hidden; transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1),box-shadow 0.3s ease; box-shadow:0 2px 12px rgba(44,44,44,0.04); }
+    .blog-card:hover { transform:translateY(-6px); box-shadow:0 16px 40px rgba(44,44,44,0.1); }
+    .blog-card-img { overflow:hidden; height:220px; }
+    .blog-card-img img { width:100%; height:100%; object-fit:cover; transition:transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94); }
+    .blog-card:hover .blog-card-img img { transform:scale(1.07); }
 
-    /* Photo frame */
-    .photo-frame { position: relative; }
-    .photo-frame::before { content: ''; position: absolute; top: -18px; left: -18px; right: 18px; bottom: 18px; border: 1px solid rgba(196,164,107,0.3); z-index: 0; pointer-events: none; }
-    .photo-frame img { position: relative; z-index: 1; }
+    .photo-frame { position:relative; }
+    .photo-frame::before { content:''; position:absolute; top:-18px; left:-18px; right:18px; bottom:18px; border:1px solid rgba(196,164,107,0.3); z-index:0; pointer-events:none; }
+    .photo-frame img { position:relative; z-index:1; }
 
-    /* Hero image */
-    .hero-img { transform: scale(1.04); transition: transform 10s ease-out; }
-    .hero-img.loaded { transform: scale(1); }
+    .hero-img { transform:scale(1.04); transition:transform 10s ease-out; }
+    .hero-img.loaded { transform:scale(1); }
 
-    /* Sticky bar */
-    .sticky-rdv { transform: translateY(100%); transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94); }
-    .sticky-rdv.show { transform: translateY(0); }
+    .sticky-rdv { transform:translateY(100%); transition:transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94); }
+    .sticky-rdv.show { transform:translateY(0); }
 
-    /* Stat number */
-    .stat-number { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-weight: 300; color: #7A9E87; line-height: 1; }
+    .stat-number { font-family:'Cormorant Garamond',serif; font-size:3.5rem; font-weight:300; color:#7A9E87; line-height:1; }
 
-    @keyframes pulse-dot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.75); } }
+    @keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.5;transform:scale(0.75);} }
+
+    /* ── Hamburger ── */
+    #hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:4px; z-index:110; }
+    .ham-line { width:22px; height:1.5px; background:#2C2C2C; display:block; transition:all 0.3s ease; transform-origin:center; }
+    #hamburger.open .ham-line:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
+    #hamburger.open .ham-line:nth-child(2) { opacity:0; }
+    #hamburger.open .ham-line:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); width:22px; }
+
+    /* ── Mobile menu overlay ── */
+    #mobile-menu { display:none; position:fixed; inset:0; background:rgba(245,239,230,0.98); z-index:105; flex-direction:column; justify-content:center; align-items:center; gap:28px; padding:80px 40px; backdrop-filter:blur(12px); }
+    #mobile-menu.open { display:flex; }
+    #mobile-menu a { font-family:'Cormorant Garamond',serif; font-size:2rem; font-weight:300; color:#2C2C2C; text-decoration:none; letter-spacing:-0.01em; transition:color 0.2s; }
+    #mobile-menu a:hover { color:#7A9E87; }
+    #mobile-menu .mobile-rdv { font-family:'Inter',sans-serif; font-size:13px; margin-top:16px; }
+
+    /* ═══════════════════ RESPONSIVE ═══════════════════ */
+    @media (max-width: 768px) {
+      #nav-links { display:none !important; }
+      #hamburger { display:flex !important; }
+      #main-nav { padding:0 20px !important; }
+
+      /* Hero */
+      #hero { grid-template-columns:1fr !important; min-height:auto !important; }
+      #hero-photo { display:none !important; }
+      #hero-text { padding:56px 24px 64px !important; }
+      #hero-text .hero-deco-line { display:none !important; }
+      #hero-trust { flex-wrap:wrap; gap:20px !important; }
+
+      /* Pain points */
+      #pain-section { padding:72px 24px !important; }
+      #pain-grid { grid-template-columns:1fr !important; }
+
+      /* Stats */
+      #stats-section { padding:60px 24px !important; }
+      #stats-grid { grid-template-columns:1fr 1fr !important; gap:32px !important; }
+      .stat-number { font-size:2.8rem !important; }
+
+      /* Services */
+      #services-section { padding:72px 24px !important; }
+      #services-grid { grid-template-columns:1fr !important; }
+
+      /* Approach */
+      #approach-section { padding:72px 24px !important; }
+      #approach-grid { grid-template-columns:1fr !important; gap:40px !important; }
+      #approach-photo { display:none !important; }
+      .photo-frame::before { display:none; }
+
+      /* Testimonials */
+      #testimonials-section { padding:72px 24px !important; }
+      #testimonials-grid { grid-template-columns:1fr !important; }
+
+      /* Blog teaser */
+      #blog-teaser-section { padding:72px 24px !important; }
+      #blog-teaser-grid { grid-template-columns:1fr !important; }
+      #blog-teaser-header { flex-direction:column !important; align-items:flex-start !important; gap:20px !important; }
+
+      /* CTA section */
+      #cta-section { padding:72px 24px !important; }
+      #cta-buttons { flex-direction:column !important; align-items:center !important; }
+
+      /* Footer */
+      footer { padding:56px 24px 32px !important; }
+      #footer-grid { grid-template-columns:1fr 1fr !important; gap:36px !important; }
+      #footer-brand { grid-column:1 / -1 !important; }
+
+      /* Sticky bar */
+      #sticky-rdv { padding:12px 20px !important; }
+      #sticky-text { display:none !important; }
+    }
+
+    @media (max-width: 480px) {
+      #stats-grid { grid-template-columns:1fr !important; }
+      #footer-grid { grid-template-columns:1fr !important; }
+      .btn-primary, .btn-gold, .btn-outline { width:100%; justify-content:center; }
+    }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav id="main-nav" style="position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(245,239,230,0.96); transition: all 0.3s ease; padding: 0 48px;">
-  <div style="max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 72px;">
-    <a href="index.html" style="text-decoration: none;">
-      <span style="font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 400; color: #2C2C2C; letter-spacing: 0.02em;">Corinne <span style="color: #7A9E87;">Virot</span></span>
-      <div style="font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #6B6B6B; margin-top: 1px;">Diététicienne-Nutritionniste</div>
+<!-- ═══ MOBILE MENU OVERLAY ═══ -->
+<div id="mobile-menu">
+  <a href="index.html">Accueil</a>
+  <a href="consultations.html">Consultations</a>
+  <a href="approche.html">Mon Approche</a>
+  <a href="blog.html">Blog</a>
+  <a href="contact.html">Contact</a>
+  <a href="https://www.doctolib.fr/dieteticien/le-pin/corinne-virot/booking" target="_blank" class="btn-primary mobile-rdv">Prendre RDV sur Doctolib</a>
+</div>
+
+<!-- ═══ NAV ═══ -->
+<nav id="main-nav" style="position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(245,239,230,0.96);transition:all 0.3s ease;padding:0 48px;">
+  <div style="max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:72px;">
+    <a href="index.html" style="text-decoration:none;">
+      <span style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:400;color:#2C2C2C;letter-spacing:0.02em;">Corinne <span style="color:#7A9E87;">Virot</span></span>
+      <div style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#6B6B6B;margin-top:1px;">Diététicienne-Nutritionniste</div>
     </a>
-    <div style="display: flex; align-items: center; gap: 36px;">
-      <a href="index.html" class="active" style="font-size: 13px; letter-spacing: 0.05em; color: #2C2C2C; text-decoration: none;">Accueil</a>
-      <a href="consultations.html" style="font-size: 13px; letter-spacing: 0.05em; color: #2C2C2C; text-decoration: none;">Consultations</a>
-      <a href="approche.html" style="font-size: 13px; letter-spacing: 0.05em; color: #2C2C2C; text-decoration: none;">Mon Approche</a>
-      <a href="blog.html" style="font-size: 13px; letter-spacing: 0.05em; color: #2C2C2C; text-decoration: none;">Blog</a>
-      <a href="contact.html" style="font-size: 13px; letter-spacing: 0.05em; color: #2C2C2C; text-decoration: none;">Contact</a>
-      <a href="https://www.doctolib.fr/dieteticien/le-pin/corinne-virot/booking" target="_blank" class="btn-primary" style="padding: 11px 24px;">Prendre RDV</a>
+    <div id="nav-links" style="display:flex;align-items:center;gap:36px;">
+      <a href="index.html" class="active" style="font-size:13px;letter-spacing:0.05em;color:#2C2C2C;text-decoration:none;">Accueil</a>
+      <a href="consultations.html" style="font-size:13px;letter-spacing:0.05em;color:#2C2C2C;text-decoration:none;">Consultations</a>
+      <a href="approche.html" style="font-size:13px;letter-spacing:0.05em;color:#2C2C2C;text-decoration:none;">Mon Approche</a>
+      <a href="blog.html" style="font-size:13px;letter-spacing:0.05em;color:#2C2C2C;text-decoration:none;">Blog</a>
+      <a href="contact.html" style="font-size:13px;letter-spacing:0.05em;color:#2C2C2C;text-decoration:none;">Contact</a>
+      <a href="https://www.doctolib.fr/dieteticien/le-pin/corinne-virot/booking" target="_blank" class="btn-primary" style="padding:11px 24px;">Prendre RDV</a>
     </div>
+    <button id="hamburger" onclick="toggleMenu()" aria-label="Ouvrir le menu">
+      <span class="ham-line"></span>
+      <span class="ham-line"></span>
+      <span class="ham-line" style="width:16px;"></span>
+    </button>
   </div>
 </nav>
 
-<!-- ═══════════════════════════════════════════ HERO ═══ -->
-<section style="min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; padding-top: 72px;">
-  <!-- Left: text -->
-  <div style="display: flex; flex-direction: column; justify-content: center; padding: 80px 64px 80px 96px; background: #F5EFE6; position: relative;">
-    <div style="position: absolute; left: 48px; top: 22%; bottom: 22%; width: 1px; background: linear-gradient(to bottom, transparent, rgba(196,164,107,0.4), transparent);"></div>
-
-    <div style="font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: #7A9E87; margin-bottom: 28px; font-weight: 500;">Diététicienne-Nutritionniste · Santé Féminine</div>
-
-    <h1 style="font-size: clamp(2.8rem, 4.5vw, 4.2rem); font-weight: 300; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 32px; color: #2C2C2C;">
-      Retrouvez<br>
-      <em style="font-style: italic; color: #7A9E87;">l'équilibre</em><br>
-      à votre rythme
+<!-- ═══ HERO ═══ -->
+<section id="hero" style="min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding-top:72px;">
+  <div id="hero-text" style="display:flex;flex-direction:column;justify-content:center;padding:80px 64px 80px 96px;background:#F5EFE6;position:relative;">
+    <div class="hero-deco-line" style="position:absolute;left:48px;top:22%;bottom:22%;width:1px;background:linear-gradient(to bottom,transparent,rgba(196,164,107,0.4),transparent);"></div>
+    <div style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:#7A9E87;margin-bottom:28px;font-weight:500;">Diététicienne-Nutritionniste · Santé Féminine</div>
+    <h1 style="font-size:clamp(2.6rem,4.5vw,4.2rem);font-weight:300;line-height:1.1;letter-spacing:-0.03em;margin-bottom:32px;color:#2C2C2C;">
+      Retrouvez<br><em style="font-style:italic;color:#7A9E87;">l'équilibre</em><br>à votre rythme
     </h1>
-
-    <p style="font-size: 1rem; line-height: 1.85; color: #6B6B6B; max-width: 400px; margin-bottom: 44px;">
+    <p style="font-size:1rem;line-height:1.85;color:#6B6B6B;max-width:400px;margin-bottom:44px;">
       Accompagnement diététique personnalisé, sans privation ni frustration. Spécialisée en santé féminine — ménopause, endométriose, SOPK.
     </p>
-
-    <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 56px;">
+    <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:56px;">
       <a href="https://www.doctolib.fr/dieteticien/le-pin/corinne-virot/booking" target="_blank" class="btn-primary">
         <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
         Prendre rendez-vous
       </a>
-      <a href="approche.html" class="btn-outline">Découvrir mon approche</a>
+      <a href="approche.html" class="btn-outline">Mon approche</a>
     </div>
-
-    <div style="display: flex; gap: 32px; padding-top: 32px; border-top: 1px solid rgba(44,44,44,0.08);">
-      <div>
-        <div style="font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 300; color: #7A9E87; line-height: 1;">2</div>
-        <div style="font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #6B6B6B; margin-top: 4px;">Cabinets</div>
-      </div>
-      <div style="width: 1px; background: rgba(44,44,44,0.08);"></div>
-      <div>
-        <div style="font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 300; color: #7A9E87; line-height: 1;">0</div>
-        <div style="font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #6B6B6B; margin-top: 4px;">Régime frustrant</div>
-      </div>
-      <div style="width: 1px; background: rgba(44,44,44,0.08);"></div>
-      <div>
-        <div style="font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 300; color: #7A9E87; line-height: 1;">Visio</div>
-        <div style="font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #6B6B6B; margin-top: 4px;">Disponible</div>
-      </div>
+    <div id="hero-trust" style="display:flex;gap:32px;padding-top:32px;border-top:1px solid rgba(44,44,44,0.08);">
+      <div><div style="font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:300;color:#7A9E87;line-height:1;">2</div><div style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#6B6B6B;margin-top:4px;">Cabinets</div></div>
+      <div style="width:1px;background:rgba(44,44,44,0.08);"></div>
+      <div><div style="font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:300;color:#7A9E87;line-height:1;">0</div><div style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#6B6B6B;margin-top:4px;">Régime frustrant</div></div>
+      <div style="width:1px;background:rgba(44,44,44,0.08);"></div>
+      <div><div style="font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:300;color:#7A9E87;line-height:1;">Visio</div><div style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#6B6B6B;margin-top:4px;">Disponible</div></div>
     </div>
   </div>
-
-  <!-- Right: real photo -->
-  <div style="position: relative; overflow: hidden; min-height: 600px;">
-    <img class="hero-img"
-      src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=900&h=1000&fit=crop&q=80"
-      alt="Assiette colorée et équilibrée"
-      style="width: 100%; height: 100%; object-fit: cover; display: block;"
-      onload="this.classList.add('loaded')"
-    >
-    <div style="position: absolute; inset: 0; background: linear-gradient(to right, rgba(245,239,230,0.4) 0%, transparent 35%);"></div>
-    <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(245,239,230,0.15) 0%, transparent 25%);"></div>
-
-    <!-- Floating badge -->
-    <div style="position: absolute; bottom: 48px; right: 36px; background: rgba(253,250,246,0.96); padding: 20px 24px; box-shadow: 0 8px 40px rgba(44,44,44,0.14); border-left: 3px solid #C4A46B; backdrop-filter: blur(10px);">
-      <div style="font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: #C4A46B; margin-bottom: 6px; font-weight: 500;">Prochain RDV disponible</div>
-      <div style="font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 400; color: #2C2C2C;">Réserver sur Doctolib →</div>
+  <div id="hero-photo" style="position:relative;overflow:hidden;min-height:600px;">
+    <img class="hero-img" src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=900&h=1000&fit=crop&q=80" alt="Assiette colorée et équilibrée" style="width:100%;height:100%;object-fit:cover;display:block;" onload="this.classList.add('loaded')">
+    <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(245,239,230,0.4) 0%,transparent 35%);"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(245,239,230,0.15) 0%,transparent 25%);"></div>
+    <div style="position:absolute;bottom:48px;right:36px;background:rgba(253,250,246,0.96);padding:20px 24px;box-shadow:0 8px 40px rgba(44,44,44,0.14);border-left:3px solid #C4A46B;backdrop-filter:blur(10px);">
+      <div style="font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:#C4A46B;margin-bottom:6px;font-weight:500;">Prochain RDV disponible</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:400;color:#2C2C2C;">Réserver sur Doctolib →</div>
     </div>
   </div>
 </section>
 
-<!-- ═════════════════════════════════ PAIN POINTS ═══ -->
-<section style="background: #272727; padding: 96px 48px; position: relative; overflow: hidden;">
-  <div style="position: absolute; top: -30%; right: -8%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(122,158,135,0.07) 0%, transparent 65%); pointer-events: none;"></div>
-  <div style="position: absolute; bottom: -20%; left: -5%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(196,164,107,0.05) 0%, transparent 65%); pointer-events: none;"></div>
-
-  <div style="max-width: 1280px; margin: 0 auto;">
-    <div class="reveal" style="text-align: center; margin-bottom: 64px;">
-      <div style="font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: #7A9E87; margin-bottom: 18px;">Ce que mes patientes me confient</div>
-      <h2 style="font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 300; color: #FDFAF6; letter-spacing: -0.02em; line-height: 1.2;">Vous vous <em style="font-style: italic; color: #C4A46B;">reconnaissez</em> ?</h2>
+<!-- ═══ PAIN POINTS ═══ -->
+<section id="pain-section" style="background:#272727;padding:96px 48px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-30%;right:-8%;width:700px;height:700px;background:radial-gradient(circle,rgba(122,158,135,0.07) 0%,transparent 65%);pointer-events:none;"></div>
+  <div style="max-width:1280px;margin:0 auto;">
+    <div class="reveal" style="text-align:center;margin-bottom:64px;">
+      <div style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:#7A9E87;margin-bottom:18px;">Ce que mes patientes me confient</div>
+      <h2 style="font-size:clamp(2rem,3.5vw,3rem);font-weight:300;color:#FDFAF6;letter-spacing:-0.02em;line-height:1.2;">Vous vous <em style="font-style:italic;color:#C4A46B;">reconnaissez</em> ?</h2>
     </div>
-
-    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
-      <div class="pain-card reveal reveal-delay-1">
-        <div style="font-size: 2rem; margin-bottom: 20px;">🌸</div>
-        <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 400; color: #FDFAF6; margin-bottom: 14px; line-height: 1.3;">"Je fais tout bien mais rien ne bouge"</h3>
-        <p style="font-size: 0.85rem; color: rgba(253,250,246,0.5); line-height: 1.85;">Hormones, ménopause, SOPK… l'alimentation standard ne suffit pas. Il vous faut une approche qui comprend vraiment le corps de la femme.</p>
-      </div>
-      <div class="pain-card reveal reveal-delay-2">
-        <div style="font-size: 2rem; margin-bottom: 20px;">😔</div>
-        <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 400; color: #FDFAF6; margin-bottom: 14px; line-height: 1.3;">"J'ai essayé tous les régimes sans succès"</h3>
-        <p style="font-size: 0.85rem; color: rgba(253,250,246,0.5); line-height: 1.85;">Les régimes créent un rapport conflictuel à la nourriture. Mon approche repose sur la bienveillance, l'équilibre et le plaisir alimentaire.</p>
-      </div>
-      <div class="pain-card reveal reveal-delay-3">
-        <div style="font-size: 2rem; margin-bottom: 20px;">💭</div>
-        <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 400; color: #FDFAF6; margin-bottom: 14px; line-height: 1.3;">"Je ne sais plus quoi manger"</h3>
-        <p style="font-size: 0.85rem; color: rgba(253,250,246,0.5); line-height: 1.85;">Face à l'overdose d'informations contradictoires, retrouvez une alimentation intuitive, plaisante et parfaitement adaptée à votre vie.</p>
-      </div>
+    <div id="pain-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;">
+      <div class="pain-card reveal reveal-delay-1"><div style="font-size:2rem;margin-bottom:20px;">🌸</div><h3 style="font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:400;color:#FDFAF6;margin-bottom:14px;line-height:1.3;">"Je fais tout bien mais rien ne bouge"</h3><p style="font-size:0.85rem;color:rgba(253,250,246,0.5);line-height:1.85;">Hormones, ménopause, SOPK… l'alimentation standard ne suffit pas. Il vous faut une approche qui comprend vraiment le corps de la femme.</p></div>
+      <div class="pain-card reveal reveal-delay-2"><div style="font-size:2rem;margin-bottom:20px;">😔</div><h3 style="font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:400;color:#FDFAF6;margin-bottom:14px;line-height:1.3;">"J'ai essayé tous les régimes sans succès"</h3><p style="font-size:0.85rem;color:rgba(253,250,246,0.5);line-height:1.85;">Les régimes créent un rapport conflictuel à la nourriture. Mon approche repose sur la bienveillance et le plaisir alimentaire.</p></div>
+      <div class="pain-card reveal reveal-delay-3"><div style="font-size:2rem;margin-bottom:20px;">💭</div><h3 style="font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:400;color:#FDFAF6;margin-bottom:14px;line-height:1.3;">"Je ne sais plus quoi manger"</h3><p style="font-size:0.85rem;color:rgba(253,250,246,0.5);line-height:1.85;">Face à l'overdose d'informations contradictoires, retrouvez une alimentation intuitive, plaisante et adaptée à votre vie.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════════════ STATS ═══ -->
-<section style="background: #FDFAF6; padding: 80px 48px; border-bottom: 1px solid rgba(44,44,44,0.05);">
-  <div style="max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; text-align: center;">
-    <div class="reveal">
-      <div class="stat-number" data-target="500" data-suffix="+">0</div>
-      <div style="font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #6B6B6B; margin-top: 10px;">Consultations / an</div>
+<!-- ═══ STATS ═══ -->
+<section id="stats-section" style="background:#FDFAF6;padding:80px 48px;border-bottom:1px solid rgba(44,44,44,0.05);">
+  <div id="stats-grid" style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:40px;text-align:center;">
+    <div class="reveal"><div class="stat-number" data-target="500" data-suffix="+">0</div><div style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:#6B6B6B;margin-top:10px;">Consultations / an</div></div>
+    <div class="reveal reveal-delay-1"><div class="stat-number" style="color:#C4A46B;" data-target="15" data-suffix=" ans">0</div><div style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:#6B6B6B;margin-top:10px;">D'expérience</div></div>
+    <div class="reveal reveal-delay-2"><div class="stat-number" data-target="3" data-suffix="">0</div><div style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:#6B6B6B;margin-top:10px;">Spécialités féminines</div></div>
+    <div class="reveal reveal-delay-3"><div class="stat-number" style="color:#C4A46B;" data-target="0" data-suffix=" régime">0</div><div style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:#6B6B6B;margin-top:10px;">Frustrant</div></div>
+  </div>
+</section>
+
+<!-- ═══ SERVICES ═══ -->
+<section id="services-section" style="padding:112px 48px;background:#F5EFE6;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <div class="reveal" style="text-align:center;margin-bottom:72px;">
+      <div style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:#7A9E87;margin-bottom:16px;">Domaines d'expertise</div>
+      <h2 style="font-size:clamp(2rem,3.5vw,3rem);font-weight:300;letter-spacing:-0.02em;">Un accompagnement <em style="font-style:italic;">sur mesure</em></h2>
     </div>
-    <div class="reveal reveal-delay-1">
-      <div class="stat-number" style="color: #C4A46B;" data-target="15" data-suffix=" ans">0</div>
-      <div style="font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #6B6B6B; margin-top: 10px;">D'expérience</div>
-    </div>
-    <div class="reveal reveal-delay-2">
-      <div class="stat-number" data-target="3" data-suffix="">0</div>
-      <div style="font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #6B6B6B; margin-top: 10px;">Spécialités féminines</div>
-    </div>
-    <div class="reveal reveal-delay-3">
-      <div class="stat-number" style="color: #C4A46B;" data-target="0" data-suffix=" régime">0</div>
-      <div style="font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #6B6B6B; margin-top: 10px;">Frustrant</div>
+    <div id="services-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
+      <div class="service-card reveal reveal-delay-1"><div style="width:50px;height:50px;background:rgba(122,158,135,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:24px;"><svg width="22" height="22" fill="none" stroke="#7A9E87" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/></svg></div><h3 style="font-size:1.25rem;font-weight:500;margin-bottom:12px;">Santé Féminine</h3><p style="font-size:0.875rem;color:#6B6B6B;line-height:1.85;">Ménopause, endométriose, SOPK — une approche nutritionnelle pensée pour les spécificités hormonales de la femme.</p></div>
+      <div class="service-card reveal reveal-delay-2"><div style="width:50px;height:50px;background:rgba(122,158,135,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:24px;"><svg width="22" height="22" fill="none" stroke="#7A9E87" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg></div><h3 style="font-size:1.25rem;font-weight:500;margin-bottom:12px;">Gestion du Poids</h3><p style="font-size:0.875rem;color:#6B6B6B;line-height:1.85;">Sans régime restrictif. Retrouvez un poids de forme durable grâce à une alimentation adaptée à votre mode de vie.</p></div>
+      <div class="service-card reveal reveal-delay-3"><div style="width:50px;height:50px;background:rgba(122,158,135,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:24px;"><svg width="22" height="22" fill="none" stroke="#7A9E87" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg></div><h3 style="font-size:1.25rem;font-weight:500;margin-bottom:12px;">Diabète & Glycémie</h3><p style="font-size:0.875rem;color:#6B6B6B;line-height:1.85;">Diabète type 2, prédiabète, résistance à l'insuline — stabiliser la glycémie tout en conservant le plaisir alimentaire.</p></div>
+      <div class="service-card reveal reveal-delay-1"><div style="width:50px;height:50px;background:rgba(196,164,107,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:24px;"><svg width="22" height="22" fill="none" stroke="#C4A46B" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div><h3 style="font-size:1.25rem;font-weight:500;margin-bottom:12px;">Santé Digestive</h3><p style="font-size:0.875rem;color:#6B6B6B;line-height:1.85;">Côlon irritable, ballonnements, reflux — identifier et corriger les déséquilibres alimentaires qui perturbent votre confort.</p></div>
+      <div class="service-card reveal reveal-delay-2"><div style="width:50px;height:50px;background:rgba(196,164,107,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:24px;"><svg width="22" height="22" fill="none" stroke="#C4A46B" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10H12V2z"/><path d="M12 2a10 10 0 0 1 10 10h-10z"/></svg></div><h3 style="font-size:1.25rem;font-weight:500;margin-bottom:12px;">Équilibre Nutritionnel</h3><p style="font-size:0.875rem;color:#6B6B6B;line-height:1.85;">Reprendre les bases d'une alimentation saine, variée et plaisante pour regagner de l'énergie au quotidien.</p></div>
+      <div class="service-card reveal reveal-delay-3"><div style="width:50px;height:50px;background:rgba(196,164,107,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:24px;"><svg width="22" height="22" fill="none" stroke="#C4A46B" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/></svg></div><h3 style="font-size:1.25rem;font-weight:500;margin-bottom:12px;">Prévention Cardio</h3><p style="font-size:0.875rem;color:#6B6B6B;line-height:1.85;">Cholestérol, triglycérides, hypertension — adapter l'alimentation pour protéger votre cœur durablement.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ════════════════════════════════════ SERVICES ═══ -->
-<section style="padding: 112px 48px; background: #F5EFE6;">
-  <div style="max-width: 1280px; margin: 0 auto;">
-    <div class="reveal" style="text-align: center; margin-bottom: 72px;">
-      <div style="font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: #7A9E87; margin-bottom: 16px;">Domaines d'expertise</div>
-      <h2 style="font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 300; letter-spacing: -0.02em;">Un accompagnement <em style="font-style: italic;">sur mesure</em></h2>
-    </div>
-
-    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
-      <div class="service-card reveal reveal-delay-1">
-        <div style="width: 50px; height: 50px; background: rgba(122,158,135,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 24px;">
-          <svg width="22" height="22" fill="none" stroke="#7A9E87" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/></svg>
-        </div>
-        <h3 style="font-size: 1.25rem; font-weight: 500; margin-bottom: 12px; letter-spacing: -0.01em;">Santé Féminine</h3>
-        <p style="font-size: 0.875rem; color: #6B6B6B; line-height: 1.85;">Ménopause, endométriose, SOPK — une approche nutritionnelle pensée pour les spécificités hormonales de la femme à chaque étape de sa vie.</p>
-        <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(44,44,44,0.06);">
-          <a href="approche.html" style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #7A9E87; text-decoration: none; font-weight: 500; transition: color 0.2s;">En savoir plus →</a>
-        </div>
+<!-- ═══ APPROACH TEASER ═══ -->
+<section id="approach-section" style="padding:112px 48px;background:#FDFAF6;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <div id="approach-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:96px;align-items:center;">
+      <div id="approach-photo" class="photo-frame reveal-left" style="margin:20px 0 0 22px;">
+        <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=600&h=700&fit=crop&q=80" alt="Corinne Virot, diététicienne-nutritionniste" style="width:100%;height:560px;object-fit:cover;display:block;">
       </div>
-
-      <div class="service-card reveal reveal-delay-2">
-        <div style="width: 50px; height: 50px; background: rgba(122,158,135,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 24px;">
-          <svg width="22" height="22" fill="none" stroke="#7A9E87" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+      <div class="reveal-right">
+        <div style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:#7A9E87;margin-bottom:20px;">La diététicienne</div>
+        <h2 style="font-size:clamp(1.9rem,3vw,2.8rem);font-weight:300;letter-spacing:-0.02em;margin-bottom:28px;line-height:1.2;">Une approche<br><em style="color:#7A9E87;">sans privation</em>,<br>ancrée dans le plaisir</h2>
+        <blockquote style="border-left:2px solid #C4A46B;padding:16px 24px;background:rgba(196,164,107,0.05);margin:0 0 32px 0;">
+          <p style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;font-weight:400;line-height:1.65;color:#2C2C2C;margin:0;">"La diététique, ce n'est pas savoir quoi enlever de votre assiette — c'est découvrir comment la remplir de bonheur."</p>
+        </blockquote>
+        <p style="font-size:0.875rem;line-height:1.95;color:#6B6B6B;margin-bottom:36px;">Diététicienne-nutritionniste diplômée d'État, Corinne Virot accompagne ses patientes sans régimes et sans frustration. Un rééquilibrage alimentaire progressif, adapté à votre vie réelle.</p>
+        <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:44px;">
+          <div style="display:flex;gap:12px;align-items:center;"><div style="width:20px;height:20px;min-width:20px;background:rgba(122,158,135,0.12);border-radius:50%;display:flex;align-items:center;justify-content:center;"><svg width="10" height="10" fill="none" stroke="#7A9E87" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg></div><span style="font-size:0.875rem;color:#6B6B6B;">Bilan nutritionnel complet dès la première consultation</span></div>
+          <div style="display:flex;gap:12px;align-items:center;"><div style="width:20px;height:20px;min-width:20px;background:rgba(122,158,135,0.12);border-radius:50%;display:flex;align-items:center;justify-content:center;"><svg width="10" height="10" fill="none" stroke="#7A9E87" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg></div><span style="font-size:0.875rem;color:#6B6B6B;">Plan alimentaire personnalisé, jamais générique</span></div>
+          <div style="display:flex;gap:12px;align-items:center;"><div style="width:20px;height:20px;min-width:20px;background:rgba(122,158,135,0.12);border-radius:50%;display:flex;align-items:center;justify-content:center;"><svg width="10" height="10" fill="none" stroke="#7A9E87" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg></div><span style="font-size:0.875rem;color:#6B6B6B;">Suivi via application mobile entre les séances</span></div>
         </div>
-        <h3 style="font-size: 1.25rem; font-weight: 500; margin-bottom: 12px; letter-spacing: -0.01em;">Gestion du Poids</h3>
-        <p style="font-size: 0.875rem; color: #6B6B6B; line-height: 1.85;">Sans régime restrictif. Retrouvez un poids de forme durable grâce à une alimentation adaptée à votre mode de vie, sans frustration.</p>
-        <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(44,44,44,0.06);">
-          <a href="consultations.html" style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #7A9E87; text-decoration: none; font-weight: 500;">En savoir plus →</a>
-        </div>
-      </div>
-
-      <div class="service-card reveal reveal-delay-3">
-        <div style="width: 50px; height: 50px; background: rgba(122,158,135,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 24px;">
-          <svg width="22" height="22" fill="none" stroke="#7A9E87" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
-        </div>
-        <h3 style="font-size: 1.25rem; font-weight: 500; margin-bottom: 12px; letter-spacing: -0.01em;">Diabète & Glycémie</h3>
-        <p style="font-size: 0.875rem; color: #6B6B6B; line-height: 1.85;">Diabète de type 2, prédiabète, résistance à l'insuline — stabiliser la glycémie tout en conservant le plaisir et la diversité alimentaire.</p>
-        <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(44,44,44,0.06);">
-          <a href="consultations.html" style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #7A9E87; text-decoration: none; font-weight: 500;">En savoir plus →</a>
-        </div>
-      </div>
-
-      <div class="service-card reveal reveal-delay-1">
-        <div style="width: 50px; height: 50px; background: rgba(196,164,107,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 24px;">
-          <svg width="22" height="22" fill="none" stroke="#C4A46B" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
-        </div>
-        <h3 style="font-size: 1.25rem; font-weight: 500; margin-bottom: 12px; letter-spacing: -0.01em;">Santé Digestive</h3>
-        <p style="font-size: 0.875rem; color: #6B6B6B; line-height: 1.85;">Côlon irritable, ballonnements, reflux — identifier et corriger les déséquilibres alimentaires qui perturbent votre confort digestif au quotidien.</p>
-        <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(44,44,44,0.06);">
-          <a href="consultations.html" style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #C4A46B; text-decoration: none; font-weight: 500;">En savoir plus →</a>
-        </div>
-      </div>
-
-      <div class="service-card reveal reveal-delay-2">
-        <div style="width: 50px; height: 50px; background: rgba(196,164,107,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 24px;">
-          <svg width="22" height="22" fill="none" stroke="#C4A46B" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10H12V2z"/><path d="M12 2a10 10 0 0 1 10 10h-10z"/></svg>
-        </div>
-        <h3 style="font-size: 1.25rem; font-weight: 500; margin-bottom: 12px; letter-spacing: -0.01em;">Équilibre Nutritionnel</h3>
-        <p style="font-size: 0.875rem; color: #6B6B6B; line-height: 1.85;">Reprendre les bases d'une alimentation saine, variée et plaisante — pour se sentir bien dans son corps et regagner de l'énergie au quotidien.</p>
-        <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(44,44,44,0.06);">
-          <a href="consultations.html" style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #C4A46B; text-decoration: none; font-weight: 500;">En savoir plus →</a>
-        </div>
-      </div>
-
-      <div class="service-card reveal reveal-delay-3">
-        <div style="width: 50px; height: 50px; background: rgba(196,164,107,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 24px;">
-          <svg width="22" height="22" fill="none" stroke="#C4A46B" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/></svg>
-        </div>
-        <h3 style="font-size: 1.25rem; font-weight: 500; margin-bottom: 12px; letter-spacing: -0.01em;">Prévention Cardio</h3>
-        <p style="font-size: 0.875rem; color: #6B6B6B; line-height: 1.85;">Cholestérol, triglycérides, hypertension — adapter l'alimentation pour protéger votre cœur et prévenir les maladies cardiovasculaires.</p>
-        <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(44,44,44,0.06);">
-          <a href="consultations.html" style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #C4A46B; text-decoration: none; font-weight: 500;">En savoir plus →</a>
-        </div>
+        <a href="approche.html" class="btn-outline">En savoir plus</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ════════════════════════════ APPROACH TEASER ═══ -->
-<section style="padding: 112px 48px; background: #FDFAF6;">
-  <div style="max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 96px; align-items: center;">
-    <!-- Photo with frame -->
-    <div class="photo-frame reveal-left" style="margin: 20px 0 0 22px;">
-      <img
-        src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=600&h=700&fit=crop&q=80"
-        alt="Corinne Virot, diététicienne-nutritionniste"
-        style="width: 100%; height: 560px; object-fit: cover; display: block;"
-      >
+<!-- ═══ TESTIMONIALS ═══ -->
+<section id="testimonials-section" style="padding:112px 48px;background:#F5EFE6;position:relative;overflow:hidden;">
+  <div style="position:absolute;bottom:-15%;left:-5%;width:600px;height:600px;background:radial-gradient(circle,rgba(122,158,135,0.06) 0%,transparent 65%);pointer-events:none;"></div>
+  <div style="max-width:1280px;margin:0 auto;">
+    <div class="reveal" style="text-align:center;margin-bottom:72px;">
+      <div style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:#7A9E87;margin-bottom:16px;">Témoignages</div>
+      <h2 style="font-size:clamp(2rem,3.5vw,3rem);font-weight:300;letter-spacing:-0.02em;">Ce qu'elles en <em style="font-style:italic;color:#C4A46B;">disent</em></h2>
     </div>
-
-    <!-- Text -->
-    <div class="reveal-right">
-      <div style="font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: #7A9E87; margin-bottom: 20px;">La diététicienne</div>
-      <h2 style="font-size: clamp(1.9rem, 3vw, 2.8rem); font-weight: 300; letter-spacing: -0.02em; margin-bottom: 28px; line-height: 1.2;">
-        Une approche<br><em style="color: #7A9E87;">sans privation</em>,<br>ancrée dans le plaisir
-      </h2>
-
-      <blockquote style="border-left: 2px solid #C4A46B; padding: 16px 24px; background: rgba(196,164,107,0.05); margin: 0 0 32px 0;">
-        <p style="font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-style: italic; font-weight: 400; line-height: 1.65; color: #2C2C2C; margin: 0;">
-          "La diététique, ce n'est pas savoir quoi enlever de votre assiette — c'est découvrir comment la remplir de bonheur."
-        </p>
-      </blockquote>
-
-      <p style="font-size: 0.875rem; line-height: 1.95; color: #6B6B6B; margin-bottom: 36px;">
-        Diététicienne-nutritionniste diplômée d'État, Corinne Virot accompagne ses patientes avec une philosophie claire : pas de régimes, pas de frustration. Un rééquilibrage alimentaire progressif, adapté à votre vie réelle.
-      </p>
-
-      <div style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 44px;">
-        <div style="display: flex; gap: 12px; align-items: flex-start;">
-          <div style="width: 20px; height: 20px; min-width: 20px; background: rgba(122,158,135,0.12); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-top: 2px;">
-            <svg width="10" height="10" fill="none" stroke="#7A9E87" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>
-          </div>
-          <span style="font-size: 0.875rem; color: #6B6B6B; line-height: 1.7;">Bilan nutritionnel complet dès la première consultation</span>
-        </div>
-        <div style="display: flex; gap: 12px; align-items: flex-start;">
-          <div style="width: 20px; height: 20px; min-width: 20px; background: rgba(122,158,135,0.12); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-top: 2px;">
-            <svg width="10" height="10" fill="none" stroke="#7A9E87" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>
-          </div>
-          <span style="font-size: 0.875rem; color: #6B6B6B; line-height: 1.7;">Plan alimentaire personnalisé, jamais générique</span>
-        </div>
-        <div style="display: flex; gap: 12px; align-items: flex-start;">
-          <div style="width: 20px; height: 20px; min-width: 20px; background: rgba(122,158,135,0.12); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-top: 2px;">
-            <svg width="10" height="10" fill="none" stroke="#7A9E87" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>
-          </div>
-          <span style="font-size: 0.875rem; color: #6B6B6B; line-height: 1.7;">Suivi via application mobile entre chaque séance</span>
-        </div>
-        <div style="display: flex; gap: 12px; align-items: flex-start;">
-          <div style="width: 20px; height: 20px; min-width: 20px; background: rgba(122,158,135,0.12); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-top: 2px;">
-            <svg width="10" height="10" fill="none" stroke="#7A9E87" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>
-          </div>
-          <span style="font-size: 0.875rem; color: #6B6B6B; line-height: 1.7;">Consultations en cabinet et en visio disponibles</span>
-        </div>
-      </div>
-
-      <a href="approche.html" class="btn-outline">En savoir plus sur mon approche</a>
+    <div id="testimonials-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px;">
+      <div class="testimonial-card reveal reveal-delay-1"><div style="color:#C4A46B;font-size:15px;margin-bottom:20px;letter-spacing:2px;">★★★★★</div><p style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;line-height:1.7;color:#2C2C2C;margin-bottom:24px;">"Pour la première fois, je mange sans culpabilité. Corinne m'a aidée à comprendre mes besoins lors de ma ménopause. Je recommande vivement !"</p><div style="display:flex;align-items:center;gap:12px;padding-top:20px;border-top:1px solid rgba(44,44,44,0.06);"><div style="width:38px;height:38px;border-radius:50%;background:rgba(122,158,135,0.15);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:500;color:#7A9E87;">M</div><div><div style="font-size:13px;font-weight:500;">Marie L.</div><div style="font-size:11px;color:#6B6B6B;margin-top:1px;">Ménopause · Gestion du poids</div></div></div></div>
+      <div class="testimonial-card reveal reveal-delay-2"><div style="color:#C4A46B;font-size:15px;margin-bottom:20px;letter-spacing:2px;">★★★★★</div><p style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;line-height:1.7;color:#2C2C2C;margin-bottom:24px;">"Grâce au suivi en visio, j'ai pu travailler avec Corinne depuis Lyon. Son expertise sur l'endométriose est vraiment précieuse."</p><div style="display:flex;align-items:center;gap:12px;padding-top:20px;border-top:1px solid rgba(44,44,44,0.06);"><div style="width:38px;height:38px;border-radius:50%;background:rgba(196,164,107,0.15);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:500;color:#C4A46B;">S</div><div><div style="font-size:13px;font-weight:500;">Sophie D.</div><div style="font-size:11px;color:#6B6B6B;margin-top:1px;">Endométriose · Suivi en visio</div></div></div></div>
+      <div class="testimonial-card reveal reveal-delay-3"><div style="color:#C4A46B;font-size:15px;margin-bottom:20px;letter-spacing:2px;">★★★★★</div><p style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;line-height:1.7;color:#2C2C2C;margin-bottom:24px;">"Diagnostiquée SOPK, je ne savais plus quoi manger. Corinne m'a guidée avec bienveillance vers des habitudes durables."</p><div style="display:flex;align-items:center;gap:12px;padding-top:20px;border-top:1px solid rgba(44,44,44,0.06);"><div style="width:38px;height:38px;border-radius:50%;background:rgba(122,158,135,0.15);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:500;color:#7A9E87;">A</div><div><div style="font-size:13px;font-weight:500;">Amélie R.</div><div style="font-size:11px;color:#6B6B6B;margin-top:1px;">SOPK · Équilibre nutritionnel</div></div></div></div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════ TESTIMONIALS ═══ -->
-<section style="padding: 112px 48px; background: #F5EFE6; position: relative; overflow: hidden;">
-  <div style="position: absolute; bottom: -15%; left: -5%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(122,158,135,0.06) 0%, transparent 65%); pointer-events: none;"></div>
-
-  <div style="max-width: 1280px; margin: 0 auto;">
-    <div class="reveal" style="text-align: center; margin-bottom: 72px;">
-      <div style="font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: #7A9E87; margin-bottom: 16px;">Témoignages</div>
-      <h2 style="font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 300; letter-spacing: -0.02em;">Ce qu'elles en <em style="font-style: italic; color: #C4A46B;">disent</em></h2>
+<!-- ═══ BLOG TEASER ═══ -->
+<section id="blog-teaser-section" style="padding:112px 48px;background:#FDFAF6;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <div id="blog-teaser-header" class="reveal" style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:64px;">
+      <div><div style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:#7A9E87;margin-bottom:16px;">Ressources & Conseils</div><h2 style="font-size:clamp(2rem,3.5vw,3rem);font-weight:300;letter-spacing:-0.02em;">Le <em style="font-style:italic;color:#C4A46B;">blog</em> nutritionnel</h2></div>
+      <a href="blog.html" class="btn-outline" style="margin-bottom:8px;">Tous les articles</a>
     </div>
-
-    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;">
-      <div class="testimonial-card reveal reveal-delay-1">
-        <div style="color: #C4A46B; font-size: 15px; margin-bottom: 20px; letter-spacing: 2px;">★★★★★</div>
-        <p style="font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-style: italic; line-height: 1.7; color: #2C2C2C; margin-bottom: 24px;">"Pour la première fois, je mange sans culpabilité. Corinne m'a aidée à comprendre mes besoins lors de ma ménopause. Je recommande vivement !"</p>
-        <div style="display: flex; align-items: center; gap: 12px; padding-top: 20px; border-top: 1px solid rgba(44,44,44,0.06);">
-          <div style="width: 38px; height: 38px; border-radius: 50%; background: rgba(122,158,135,0.15); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 500; color: #7A9E87;">M</div>
-          <div>
-            <div style="font-size: 13px; font-weight: 500; color: #2C2C2C;">Marie L.</div>
-            <div style="font-size: 11px; color: #6B6B6B; margin-top: 1px;">Ménopause · Gestion du poids</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="testimonial-card reveal reveal-delay-2">
-        <div style="color: #C4A46B; font-size: 15px; margin-bottom: 20px; letter-spacing: 2px;">★★★★★</div>
-        <p style="font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-style: italic; line-height: 1.7; color: #2C2C2C; margin-bottom: 24px;">"Grâce au suivi en visio, j'ai pu travailler avec Corinne depuis Lyon. Son expertise sur l'endométriose et l'alimentation anti-inflammatoire est précieuse."</p>
-        <div style="display: flex; align-items: center; gap: 12px; padding-top: 20px; border-top: 1px solid rgba(44,44,44,0.06);">
-          <div style="width: 38px; height: 38px; border-radius: 50%; background: rgba(196,164,107,0.15); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 500; color: #C4A46B;">S</div>
-          <div>
-            <div style="font-size: 13px; font-weight: 500; color: #2C2C2C;">Sophie D.</div>
-            <div style="font-size: 11px; color: #6B6B6B; margin-top: 1px;">Endométriose · Suivi en visio</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="testimonial-card reveal reveal-delay-3">
-        <div style="color: #C4A46B; font-size: 15px; margin-bottom: 20px; letter-spacing: 2px;">★★★★★</div>
-        <p style="font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-style: italic; line-height: 1.7; color: #2C2C2C; margin-bottom: 24px;">"Diagnostiquée SOPK, je ne savais plus quoi manger. Corinne m'a guidée avec bienveillance vers des habitudes durables, sans jamais me priver."</p>
-        <div style="display: flex; align-items: center; gap: 12px; padding-top: 20px; border-top: 1px solid rgba(44,44,44,0.06);">
-          <div style="width: 38px; height: 38px; border-radius: 50%; background: rgba(122,158,135,0.15); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 500; color: #7A9E87;">A</div>
-          <div>
-            <div style="font-size: 13px; font-weight: 500; color: #2C2C2C;">Amélie R.</div>
-            <div style="font-size: 11px; color: #6B6B6B; margin-top: 1px;">SOPK · Équilibre nutritionnel</div>
-          </div>
-        </div>
-      </div>
+    <div id="blog-teaser-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px;">
+      <a href="blog.html" class="blog-card reveal reveal-delay-1" style="text-decoration:none;color:inherit;"><div class="blog-card-img"><img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&h=400&fit=crop&q=80" alt="" loading="lazy"></div><div style="padding:28px;"><span style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;background:rgba(122,158,135,0.1);color:#7A9E87;padding:4px 10px;">Ménopause</span><h3 style="font-size:1.3rem;font-weight:500;line-height:1.4;margin:16px 0 12px;">Les aliments alliés de la ménopause</h3><p style="font-size:0.8rem;color:#6B6B6B;line-height:1.85;margin-bottom:20px;">Phytoestrogènes, calcium, oméga-3 — les nutriments clés pour traverser cette période avec sérénité.</p><div style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#C4A46B;font-weight:500;">Lire →</div></div></a>
+      <a href="blog.html" class="blog-card reveal reveal-delay-2" style="text-decoration:none;color:inherit;"><div class="blog-card-img"><img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&h=400&fit=crop&q=80" alt="" loading="lazy"></div><div style="padding:28px;"><span style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;background:rgba(196,164,107,0.1);color:#C4A46B;padding:4px 10px;">SOPK</span><h3 style="font-size:1.3rem;font-weight:500;line-height:1.4;margin:16px 0 12px;">SOPK : réguler ses hormones par l'alimentation</h3><p style="font-size:0.8rem;color:#6B6B6B;line-height:1.85;margin-bottom:20px;">Index glycémique, anti-inflammatoires, microbiome — les clés d'une nutrition adaptée au SOPK.</p><div style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#C4A46B;font-weight:500;">Lire →</div></div></a>
+      <a href="blog.html" class="blog-card reveal reveal-delay-3" style="text-decoration:none;color:inherit;"><div class="blog-card-img"><img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=600&h=400&fit=crop&q=80" alt="" loading="lazy"></div><div style="padding:28px;"><span style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;background:rgba(122,158,135,0.1);color:#7A9E87;padding:4px 10px;">Équilibre</span><h3 style="font-size:1.3rem;font-weight:500;line-height:1.4;margin:16px 0 12px;">5 signes que votre relation à la nourriture mérite d'être repensée</h3><p style="font-size:0.8rem;color:#6B6B6B;line-height:1.85;margin-bottom:20px;">Culpabilité, pensées obsessionnelles… et comment retrouver une relation apaisée.</p><div style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#C4A46B;font-weight:500;">Lire →</div></div></a>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════ BLOG TEASER ═══ -->
-<section style="padding: 112px 48px; background: #FDFAF6;">
-  <div style="max-width: 1280px; margin: 0 auto;">
-    <div class="reveal" style="display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 64px;">
-      <div>
-        <div style="font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: #7A9E87; margin-bottom: 16px;">Ressources & Conseils</div>
-        <h2 style="font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 300; letter-spacing: -0.02em;">Le <em style="font-style: italic; color: #C4A46B;">blog</em> nutritionnel</h2>
-      </div>
-      <a href="blog.html" class="btn-outline" style="margin-bottom: 8px;">Tous les articles</a>
-    </div>
-
-    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;">
-      <a href="blog.html" class="blog-card reveal reveal-delay-1" style="text-decoration: none; color: inherit;">
-        <div class="blog-card-img">
-          <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&h=400&fit=crop&q=80" alt="Alimentation ménopause" loading="lazy">
-        </div>
-        <div style="padding: 28px;">
-          <span style="font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; background: rgba(122,158,135,0.1); color: #7A9E87; padding: 4px 10px;">Ménopause</span>
-          <h3 style="font-size: 1.3rem; font-weight: 500; line-height: 1.4; margin: 16px 0 12px; letter-spacing: -0.01em;">Les aliments alliés de la ménopause que vous devriez connaître</h3>
-          <p style="font-size: 0.8rem; color: #6B6B6B; line-height: 1.85; margin-bottom: 20px;">Phytoestrogènes, calcium, oméga-3 — découvrez quels nutriments soutenir votre corps pendant cette période de transition hormonale.</p>
-          <div style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #C4A46B; font-weight: 500;">Lire l'article →</div>
-        </div>
-      </a>
-
-      <a href="blog.html" class="blog-card reveal reveal-delay-2" style="text-decoration: none; color: inherit;">
-        <div class="blog-card-img">
-          <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&h=400&fit=crop&q=80" alt="SOPK alimentation" loading="lazy">
-        </div>
-        <div style="padding: 28px;">
-          <span style="font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; background: rgba(196,164,107,0.1); color: #C4A46B; padding: 4px 10px;">SOPK</span>
-          <h3 style="font-size: 1.3rem; font-weight: 500; line-height: 1.4; margin: 16px 0 12px; letter-spacing: -0.01em;">SOPK : comment l'alimentation peut réguler vos hormones naturellement</h3>
-          <p style="font-size: 0.8rem; color: #6B6B6B; line-height: 1.85; margin-bottom: 20px;">Index glycémique, anti-inflammatoires, microbiome — les clés d'une approche nutritionnelle pour le syndrome des ovaires polykystiques.</p>
-          <div style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #C4A46B; font-weight: 500;">Lire l'article →</div>
-        </div>
-      </a>
-
-      <a href="blog.html" class="blog-card reveal reveal-delay-3" style="text-decoration: none; color: inherit;">
-        <div class="blog-card-img">
-          <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=600&h=400&fit=crop&q=80" alt="Relation nourriture" loading="lazy">
-        </div>
-        <div style="padding: 28px;">
-          <span style="font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; background: rgba(122,158,135,0.1); color: #7A9E87; padding: 4px 10px;">Équilibre</span>
-          <h3 style="font-size: 1.3rem; font-weight: 500; line-height: 1.4; margin: 16px 0 12px; letter-spacing: -0.01em;">5 signes que votre relation à la nourriture mérite d'être repensée</h3>
-          <p style="font-size: 0.8rem; color: #6B6B6B; line-height: 1.85; margin-bottom: 20px;">Culpabilité, pensées obsessionnelles, peur de certains aliments… et comment retrouver une relation apaisée avec ce que vous mangez.</p>
-          <div style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #C4A46B; font-weight: 500;">Lire l'article →</div>
-        </div>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ════════════════════════════════ FINAL CTA ═══ -->
-<section style="background: #272727; padding: 100px 48px; text-align: center; position: relative; overflow: hidden;">
-  <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 700px; height: 700px; background: radial-gradient(circle, rgba(196,164,107,0.07) 0%, transparent 60%); pointer-events: none;"></div>
-
-  <div style="position: relative; max-width: 700px; margin: 0 auto;" class="reveal">
-    <div style="font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: #C4A46B; margin-bottom: 24px;">Première consultation · 50€</div>
-    <h2 style="font-size: clamp(2.2rem, 4vw, 3.5rem); font-weight: 300; color: #FDFAF6; letter-spacing: -0.03em; margin-bottom: 24px; line-height: 1.2;">
-      Prête à prendre<br><em style="font-style: italic; color: #C4A46B;">soin de vous</em> ?
-    </h2>
-    <p style="font-size: 0.95rem; color: rgba(253,250,246,0.55); line-height: 1.95; margin-bottom: 48px;">
-      Première consultation 50€ (1h–1h15) · Séances de suivi 40€ (~45min)<br>
-      En cabinet à Germigny-l'Évêque ou Le Pin, ou en visio depuis partout.
-    </p>
-    <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+<!-- ═══ CTA ═══ -->
+<section id="cta-section" style="background:#272727;padding:100px 48px;text-align:center;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(196,164,107,0.07) 0%,transparent 60%);pointer-events:none;"></div>
+  <div style="position:relative;max-width:700px;margin:0 auto;" class="reveal">
+    <div style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:#C4A46B;margin-bottom:24px;">Première consultation · 50€</div>
+    <h2 style="font-size:clamp(2.2rem,4vw,3.5rem);font-weight:300;color:#FDFAF6;letter-spacing:-0.03em;margin-bottom:24px;line-height:1.2;">Prête à prendre<br><em style="font-style:italic;color:#C4A46B;">soin de vous</em> ?</h2>
+    <p style="font-size:0.95rem;color:rgba(253,250,246,0.55);line-height:1.95;margin-bottom:48px;">Première consultation 50€ (1h–1h15) · Séances de suivi 40€ (~45min)<br>En cabinet à Germigny-l'Évêque ou Le Pin, ou en visio depuis partout.</p>
+    <div id="cta-buttons" style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
       <a href="https://www.doctolib.fr/dieteticien/le-pin/corinne-virot/booking" target="_blank" class="btn-gold">
         <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
         Réserver sur Doctolib
       </a>
-      <a href="tel:0766361504" style="display: inline-flex; align-items: center; gap: 8px; border: 1.5px solid rgba(255,255,255,0.15); color: rgba(253,250,246,0.65); padding: 14px 32px; font-size: 13px; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; transition: all 0.25s ease;">
+      <a href="tel:0766361504" style="display:inline-flex;align-items:center;gap:8px;border:1.5px solid rgba(255,255,255,0.15);color:rgba(253,250,246,0.65);padding:14px 32px;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;transition:all 0.25s ease;">
         <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.8a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 3h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.09a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
         07 66 36 15 04
       </a>
@@ -506,128 +352,104 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════════════ FOOTER ═══ -->
-<footer style="background: #1E1E1E; padding: 72px 48px 36px;">
-  <div style="max-width: 1280px; margin: 0 auto;">
-    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 56px; margin-bottom: 56px;">
-      <div>
-        <div style="font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 400; color: #FDFAF6; margin-bottom: 4px;">Corinne <span style="color: #7A9E87;">Virot</span></div>
-        <div style="font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(253,250,246,0.35); margin-bottom: 20px;">Diététicienne-Nutritionniste</div>
-        <p style="font-size: 0.825rem; color: rgba(253,250,246,0.4); line-height: 1.85; max-width: 255px;">Accompagnement nutritionnel personnalisé, spécialisé en santé féminine. Sans régimes, sans frustration.</p>
-        <div style="display: flex; gap: 12px; margin-top: 24px;">
-          <a href="https://www.instagram.com/corinne.diet" target="_blank" style="width: 34px; height: 34px; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: rgba(253,250,246,0.45); text-decoration: none; transition: all 0.25s ease;" onmouseover="this.style.borderColor='rgba(196,164,107,0.6)';this.style.color='#C4A46B'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)';this.style.color='rgba(253,250,246,0.45)'">
-            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-          </a>
-          <a href="https://www.facebook.com/corinne.virot.9" target="_blank" style="width: 34px; height: 34px; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: rgba(253,250,246,0.45); text-decoration: none; transition: all 0.25s ease;" onmouseover="this.style.borderColor='rgba(196,164,107,0.6)';this.style.color='#C4A46B'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)';this.style.color='rgba(253,250,246,0.45)'">
-            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-          </a>
+<!-- ═══ FOOTER ═══ -->
+<footer style="background:#1E1E1E;padding:72px 48px 36px;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <div id="footer-grid" style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:56px;margin-bottom:56px;">
+      <div id="footer-brand">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:400;color:#FDFAF6;margin-bottom:4px;">Corinne <span style="color:#7A9E87;">Virot</span></div>
+        <div style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(253,250,246,0.35);margin-bottom:20px;">Diététicienne-Nutritionniste</div>
+        <p style="font-size:0.825rem;color:rgba(253,250,246,0.4);line-height:1.85;max-width:255px;">Accompagnement nutritionnel personnalisé, spécialisé en santé féminine. Sans régimes, sans frustration.</p>
+        <div style="display:flex;gap:12px;margin-top:24px;">
+          <a href="https://www.instagram.com/corinne.diet" target="_blank" style="width:34px;height:34px;border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;color:rgba(253,250,246,0.45);text-decoration:none;transition:all 0.25s ease;" onmouseover="this.style.borderColor='rgba(196,164,107,0.6)';this.style.color='#C4A46B'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)';this.style.color='rgba(253,250,246,0.45)'"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a href="https://www.facebook.com/corinne.virot.9" target="_blank" style="width:34px;height:34px;border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;color:rgba(253,250,246,0.45);text-decoration:none;transition:all 0.25s ease;" onmouseover="this.style.borderColor='rgba(196,164,107,0.6)';this.style.color='#C4A46B'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)';this.style.color='rgba(253,250,246,0.45)'"><svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
         </div>
       </div>
-
       <div>
-        <div style="font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(253,250,246,0.35); margin-bottom: 22px;">Navigation</div>
-        <div style="display: flex; flex-direction: column; gap: 13px;">
-          <a href="index.html" style="font-size: 0.875rem; color: rgba(253,250,246,0.5); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#7A9E87'" onmouseout="this.style.color='rgba(253,250,246,0.5)'">Accueil</a>
-          <a href="consultations.html" style="font-size: 0.875rem; color: rgba(253,250,246,0.5); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#7A9E87'" onmouseout="this.style.color='rgba(253,250,246,0.5)'">Consultations</a>
-          <a href="approche.html" style="font-size: 0.875rem; color: rgba(253,250,246,0.5); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#7A9E87'" onmouseout="this.style.color='rgba(253,250,246,0.5)'">Mon Approche</a>
-          <a href="blog.html" style="font-size: 0.875rem; color: rgba(253,250,246,0.5); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#7A9E87'" onmouseout="this.style.color='rgba(253,250,246,0.5)'">Blog</a>
-          <a href="contact.html" style="font-size: 0.875rem; color: rgba(253,250,246,0.5); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#7A9E87'" onmouseout="this.style.color='rgba(253,250,246,0.5)'">Contact</a>
+        <div style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(253,250,246,0.35);margin-bottom:22px;">Navigation</div>
+        <div style="display:flex;flex-direction:column;gap:13px;">
+          <a href="index.html" style="font-size:0.875rem;color:rgba(253,250,246,0.5);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#7A9E87'" onmouseout="this.style.color='rgba(253,250,246,0.5)'">Accueil</a>
+          <a href="consultations.html" style="font-size:0.875rem;color:rgba(253,250,246,0.5);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#7A9E87'" onmouseout="this.style.color='rgba(253,250,246,0.5)'">Consultations</a>
+          <a href="approche.html" style="font-size:0.875rem;color:rgba(253,250,246,0.5);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#7A9E87'" onmouseout="this.style.color='rgba(253,250,246,0.5)'">Mon Approche</a>
+          <a href="blog.html" style="font-size:0.875rem;color:rgba(253,250,246,0.5);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#7A9E87'" onmouseout="this.style.color='rgba(253,250,246,0.5)'">Blog</a>
+          <a href="contact.html" style="font-size:0.875rem;color:rgba(253,250,246,0.5);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#7A9E87'" onmouseout="this.style.color='rgba(253,250,246,0.5)'">Contact</a>
         </div>
       </div>
-
       <div>
-        <div style="font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(253,250,246,0.35); margin-bottom: 22px;">Cabinets</div>
-        <div style="display: flex; flex-direction: column; gap: 18px;">
-          <div>
-            <div style="font-size: 12px; color: #7A9E87; margin-bottom: 5px; font-weight: 500;">Germigny-l'Évêque</div>
-            <div style="font-size: 0.8rem; color: rgba(253,250,246,0.35); line-height: 1.65;">1 bis Chemin du Boulet</div>
-          </div>
-          <div>
-            <div style="font-size: 12px; color: #7A9E87; margin-bottom: 5px; font-weight: 500;">Le Pin</div>
-            <div style="font-size: 0.8rem; color: rgba(253,250,246,0.35); line-height: 1.65;">Pôle de Santé<br>25 Rue de Courtry, 77181</div>
-          </div>
+        <div style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(253,250,246,0.35);margin-bottom:22px;">Cabinets</div>
+        <div style="display:flex;flex-direction:column;gap:18px;">
+          <div><div style="font-size:12px;color:#7A9E87;margin-bottom:5px;font-weight:500;">Germigny-l'Évêque</div><div style="font-size:0.8rem;color:rgba(253,250,246,0.35);line-height:1.65;">1 bis Chemin du Boulet</div></div>
+          <div><div style="font-size:12px;color:#7A9E87;margin-bottom:5px;font-weight:500;">Le Pin</div><div style="font-size:0.8rem;color:rgba(253,250,246,0.35);line-height:1.65;">Pôle de Santé<br>25 Rue de Courtry, 77181</div></div>
         </div>
       </div>
-
       <div>
-        <div style="font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(253,250,246,0.35); margin-bottom: 22px;">Contact</div>
-        <div style="display: flex; flex-direction: column; gap: 14px;">
-          <a href="tel:0766361504" style="font-size: 0.875rem; color: rgba(253,250,246,0.5); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#C4A46B'" onmouseout="this.style.color='rgba(253,250,246,0.5)'">07 66 36 15 04</a>
-          <a href="https://www.doctolib.fr/dieteticien/le-pin/corinne-virot/booking" target="_blank" style="font-size: 0.875rem; color: #C4A46B; text-decoration: none; transition: color 0.2s; font-weight: 500;" onmouseover="this.style.color='#A8854A'" onmouseout="this.style.color='#C4A46B'">Réserver sur Doctolib →</a>
+        <div style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(253,250,246,0.35);margin-bottom:22px;">Contact</div>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <a href="tel:0766361504" style="font-size:0.875rem;color:rgba(253,250,246,0.5);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#C4A46B'" onmouseout="this.style.color='rgba(253,250,246,0.5)'">07 66 36 15 04</a>
+          <a href="https://www.doctolib.fr/dieteticien/le-pin/corinne-virot/booking" target="_blank" style="font-size:0.875rem;color:#C4A46B;text-decoration:none;font-weight:500;">Réserver sur Doctolib →</a>
         </div>
       </div>
     </div>
-
-    <div style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 28px; display: flex; justify-content: space-between; align-items: center;">
-      <div style="font-size: 12px; color: rgba(253,250,246,0.22);">© 2024 Corinne Virot — Diététicienne-Nutritionniste</div>
-      <div style="font-size: 12px; color: rgba(253,250,246,0.22);">Mentions légales · N° ADELI</div>
+    <div style="border-top:1px solid rgba(255,255,255,0.05);padding-top:28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+      <div style="font-size:12px;color:rgba(253,250,246,0.22);">© 2024 Corinne Virot — Diététicienne-Nutritionniste</div>
+      <div style="font-size:12px;color:rgba(253,250,246,0.22);">Mentions légales · N° ADELI</div>
     </div>
   </div>
 </footer>
 
-<!-- ════════════════════════ STICKY DOCTOLIB BAR ═══ -->
-<div class="sticky-rdv" id="sticky-rdv" style="position: fixed; bottom: 0; left: 0; right: 0; z-index: 50; background: rgba(39,39,39,0.97); backdrop-filter: blur(16px); border-top: 1px solid rgba(196,164,107,0.18); padding: 14px 48px;">
-  <div style="max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;">
-    <div style="display: flex; align-items: center; gap: 14px;">
-      <div style="width: 8px; height: 8px; border-radius: 50%; background: #7A9E87; animation: pulse-dot 2s ease-in-out infinite;"></div>
-      <span style="font-size: 13px; color: rgba(253,250,246,0.7); letter-spacing: 0.02em;">Consultations disponibles — Cabinet & Visio</span>
+<!-- ═══ STICKY BAR ═══ -->
+<div class="sticky-rdv" id="sticky-rdv" style="position:fixed;bottom:0;left:0;right:0;z-index:50;background:rgba(39,39,39,0.97);backdrop-filter:blur(16px);border-top:1px solid rgba(196,164,107,0.18);padding:14px 48px;">
+  <div style="max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;">
+    <div id="sticky-text" style="display:flex;align-items:center;gap:14px;">
+      <div style="width:8px;height:8px;border-radius:50%;background:#7A9E87;animation:pulse-dot 2s ease-in-out infinite;"></div>
+      <span style="font-size:13px;color:rgba(253,250,246,0.7);letter-spacing:0.02em;">Consultations disponibles — Cabinet & Visio</span>
     </div>
-    <a href="https://www.doctolib.fr/dieteticien/le-pin/corinne-virot/booking" target="_blank" class="btn-gold" style="padding: 11px 28px; font-size: 12px;">
-      Prendre RDV sur Doctolib →
-    </a>
+    <a href="https://www.doctolib.fr/dieteticien/le-pin/corinne-virot/booking" target="_blank" class="btn-gold" style="padding:11px 28px;font-size:12px;">Prendre RDV sur Doctolib →</a>
   </div>
 </div>
 
 <script>
-  // Nav scroll effect
+  // Nav scroll
   const nav = document.getElementById('main-nav');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 60) nav.classList.add('nav-scrolled');
-    else nav.classList.remove('nav-scrolled');
-  }, { passive: true });
+  window.addEventListener('scroll', () => { nav.classList.toggle('nav-scrolled', window.scrollY > 60); }, { passive:true });
 
-  // Sticky bar show/hide
+  // Sticky bar
   const stickyBar = document.getElementById('sticky-rdv');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > window.innerHeight * 0.75) stickyBar.classList.add('show');
-    else stickyBar.classList.remove('show');
-  }, { passive: true });
+  window.addEventListener('scroll', () => { stickyBar.classList.toggle('show', window.scrollY > window.innerHeight * 0.75); }, { passive:true });
 
-  // Intersection Observer — scroll reveal
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        revealObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-  document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => revealObserver.observe(el));
+  // Hamburger
+  function toggleMenu() {
+    const menu = document.getElementById('mobile-menu');
+    const btn = document.getElementById('hamburger');
+    const isOpen = menu.classList.contains('open');
+    menu.classList.toggle('open');
+    btn.classList.toggle('open');
+    document.body.style.overflow = isOpen ? '' : 'hidden';
+  }
 
-  // Stats counter animation
+  // Scroll reveal
+  const ro = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } });
+  }, { threshold:0.08, rootMargin:'0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => ro.observe(el));
+
+  // Stats counter
   function animateCounter(el) {
     const target = parseInt(el.dataset.target);
     const suffix = el.dataset.suffix || '';
-    const duration = 1600;
     const start = performance.now();
     const tick = (now) => {
-      const elapsed = now - start;
-      const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      el.textContent = Math.round(eased * target) + suffix;
-      if (progress < 1) requestAnimationFrame(tick);
+      const p = Math.min((now - start) / 1600, 1);
+      const e = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(e * target) + suffix;
+      if (p < 1) requestAnimationFrame(tick);
     };
     requestAnimationFrame(tick);
   }
-  const statsObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        animateCounter(entry.target);
-        statsObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.5 });
-  document.querySelectorAll('.stat-number[data-target]').forEach(el => statsObserver.observe(el));
+  const so = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { animateCounter(e.target); so.unobserve(e.target); } });
+  }, { threshold:0.5 });
+  document.querySelectorAll('.stat-number[data-target]').forEach(el => so.observe(el));
 </script>
 </body>
 </html>

@@ -57,6 +57,49 @@
       line-height: 1;
       letter-spacing: -0.04em;
     }
+
+    /* ── Hamburger ── */
+    #hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:4px; z-index:110; }
+    .ham-line { width:22px; height:1.5px; background:#2C2C2C; display:block; transition:all 0.3s ease; transform-origin:center; }
+    #hamburger.open .ham-line:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
+    #hamburger.open .ham-line:nth-child(2) { opacity:0; }
+    #hamburger.open .ham-line:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); width:22px; }
+
+    #mobile-menu { display:none; position:fixed; inset:0; background:rgba(245,239,230,0.98); z-index:105; flex-direction:column; justify-content:center; align-items:center; gap:28px; padding:80px 40px; backdrop-filter:blur(12px); }
+    #mobile-menu.open { display:flex; }
+    #mobile-menu a { font-family:'Cormorant Garamond',serif; font-size:2rem; font-weight:300; color:#2C2C2C; text-decoration:none; transition:color 0.2s; }
+    #mobile-menu a:hover { color:#7A9E87; }
+    #mobile-menu .mobile-rdv { font-family:'Inter',sans-serif; font-size:13px; margin-top:16px; }
+
+    @media (max-width: 768px) {
+      #nav-links { display:none !important; }
+      #hamburger { display:flex !important; }
+      #main-nav, header > div { padding-left:20px !important; padding-right:20px !important; }
+
+      /* Bio grid */
+      #bio-grid { grid-template-columns:1fr !important; gap:40px !important; }
+      #bio-photo { display:none !important; }
+
+      /* Pillars */
+      #pillars-grid { grid-template-columns:1fr 1fr !important; }
+
+      /* Specialties */
+      #specialties-grid { grid-template-columns:1fr !important; }
+
+      /* Hero / sections */
+      #hero-grid { flex-direction:column !important; gap:24px !important; }
+
+      /* Padding */
+      section { padding-left:24px !important; padding-right:24px !important; }
+      section[style*="padding: 96px"], section[style*="padding: 112px"] { padding-top:64px !important; padding-bottom:64px !important; }
+
+      /* Footer */
+      footer { padding:56px 24px 32px !important; }
+      footer > div > div:first-child { grid-template-columns:1fr !important; gap:32px !important; }
+    }
+    @media (max-width: 480px) {
+      #pillars-grid { grid-template-columns:1fr !important; }
+    }
   </style>
 </head>
 <body>
@@ -68,7 +111,7 @@
         <span style="font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 500; color: #2C2C2C; letter-spacing: -0.01em;">Corinne Virot</span>
         <span style="font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 400; color: #7A9E87; letter-spacing: 0.12em; text-transform: uppercase;">Diététicienne-Nutritionniste</span>
       </a>
-      <nav style="display: flex; gap: 40px; align-items: center;">
+      <nav id="nav-links" style="display: flex; gap: 40px; align-items: center;">
         <a href="index.html" style="font-size: 13px; font-weight: 400; color: #2C2C2C; text-decoration: none; letter-spacing: 0.04em;">Accueil</a>
         <a href="consultations.html" style="font-size: 13px; font-weight: 400; color: #2C2C2C; text-decoration: none; letter-spacing: 0.04em;">Consultations</a>
         <a href="approche.html" class="active" style="font-size: 13px; font-weight: 400; color: #2C2C2C; text-decoration: none; letter-spacing: 0.04em;">Mon approche</a>
@@ -76,6 +119,9 @@
         <a href="contact.html" style="font-size: 13px; font-weight: 400; color: #2C2C2C; text-decoration: none; letter-spacing: 0.04em;">Contact</a>
         <a href="https://www.doctolib.fr/dieteticien/le-pin/corinne-virot/booking" target="_blank" class="btn-primary" style="padding: 10px 24px; font-size: 11px;">Prendre RDV</a>
       </nav>
+      <button id="hamburger" onclick="toggleMenu()" aria-label="Ouvrir le menu">
+        <span class="ham-line"></span><span class="ham-line"></span><span class="ham-line" style="width:16px;"></span>
+      </button>
     </div>
   </header>
 
@@ -297,5 +343,23 @@
     </div>
   </footer>
 
+</div><!-- mobile-menu placeholder -->
+<div id="mobile-menu">
+  <a href="index.html">Accueil</a>
+  <a href="consultations.html">Consultations</a>
+  <a href="approche.html">Mon Approche</a>
+  <a href="blog.html">Blog</a>
+  <a href="contact.html">Contact</a>
+  <a href="https://www.doctolib.fr/dieteticien/le-pin/corinne-virot/booking" target="_blank" class="btn-primary mobile-rdv">Prendre RDV sur Doctolib</a>
+</div>
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById('mobile-menu');
+    const btn = document.getElementById('hamburger');
+    menu.classList.toggle('open');
+    btn.classList.toggle('open');
+    document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+  }
+</script>
 </body>
 </html>
